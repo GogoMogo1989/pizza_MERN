@@ -1,4 +1,3 @@
-
 import React, { useEffect, useState, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import AdminNavbar from '../components/adminNavbar';
@@ -49,7 +48,7 @@ const AdminMainPage = () => {
           setIsDataRefreshed((prev) => !prev);
         } catch (error) {
           setError(error.message);
-        } finally {
+        } finally { 
           setPopupMessage('');
           setPopupNavigate('');
           setPopupConfirmCallback(() => () => {
@@ -65,8 +64,7 @@ const AdminMainPage = () => {
     };
 
     const filteredData = data.filter(item => 
-        (!selectedCategory || item.maincategory === selectedCategory) &&
-        (!selectedSubCategory || item.subcategory === selectedSubCategory)
+    (!selectedCategory || selectedCategory === 'Összes' || item.category === selectedCategory)
     );
 
     const columns = [
@@ -124,7 +122,6 @@ const AdminMainPage = () => {
             <div className="flex">
                 <AdminMainSidebar 
                     onCategorySelect={setSelectedCategory}
-                    onSubCategorySelect={setSelectedSubCategory}
                 />
                 <div className="ml-80 pl-20 pt-20">
                     {error && <p className="text-red-500">{error}</p>}
