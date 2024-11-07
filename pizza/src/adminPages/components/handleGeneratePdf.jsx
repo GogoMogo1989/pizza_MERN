@@ -26,15 +26,14 @@ const handleGeneratePDF = (data) => {
 
     const doc = new jsPDF();
     const tableColumn = [
-        "Név", "Ár", "Leírás", "Fo kategória", "Al kategória", "Termék darabszám", "Valós darabszám"
+        "Név", "Ár", "Leírás", "Kategoria"
     ];
 
     const tableRows = data.map(item => [
         replaceAccents(item.name),
         item.price,
         replaceAccents(item.description),
-        replaceAccents(item.maincategory),
-        replaceAccents(item.subcategory),
+        replaceAccents(item.category),
         item.number_of_items
     ]);
 
