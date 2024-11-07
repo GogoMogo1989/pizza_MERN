@@ -13,7 +13,6 @@ const AdminMainPage = () => {
     const [data, setData] = useState([]);
     const [error, setError] = useState(null);
     const [selectedCategory, setSelectedCategory] = useState(null);
-    const [selectedSubCategory, setSelectedSubCategory] = useState(null);
     const [isDataRefreshed, setIsDataRefreshed] = useState(false);
     const [popupMessage, setPopupMessage] = useState("");
     const [popupNavigate, setPopupNavigate] = useState("");
