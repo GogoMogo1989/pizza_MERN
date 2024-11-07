@@ -17,8 +17,7 @@ const AdminRegistration = () => {
   const [popupConfirmCallback, setPopupConfirmCallback] = useState(
     () => () => (setPopupMessage(""), setPopupNavigate(""))
   );
-  const [popupWindowCancelButtonPreview, setPopupWindowCancelButtonPreview] =
-    useState(false);
+  const popupWindowCancelButtonPreview = false;
   const navigate = useNavigate();
   const location = useLocation();
 

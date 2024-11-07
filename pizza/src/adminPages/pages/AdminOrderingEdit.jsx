@@ -22,7 +22,7 @@ const AdminOrderingEdit = () => {
     const [popupMessage, setPopupMessage] = useState("");
     const [popupNavigate, setPopupNavigate] = useState("");
     const [popupConfirmCallback, setPopupConfirmCallback] = useState(()=>()=>(setPopupMessage(""), setPopupNavigate(""))); 
-    const [popupWindowCancelButtonPreview, setPopupWindowCancelButtonPreview] = useState(false)
+    const popupWindowCancelButtonPreview = false
 
     useEffect(() => {
         const loadOrder = async () => {
