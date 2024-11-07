@@ -60,7 +60,7 @@ const AdminOrderingEdit = () => {
             zip_code: zip_code,
             country,
             address,
-            ordered_data: orderData,
+            ordered_data: ordered_data,
             order_number: order_number,
             type_of_delivery: typeOfDelivery,
             type_of_paid: typeOfPaid,
