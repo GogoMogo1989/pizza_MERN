@@ -70,7 +70,7 @@ export async function updateOrderStatus(id, isActive) {
 // Rendelés lezárása
 export async function markOrderDone(id) {
   try {
-    const response = await fetch(`${API_BASE_URL}/userorderdone/${id}`);
+    const response = await fetch(`${API_BASE_URL}/done/${id}`);
     if (!response.ok) {
       throw new Error('Hiba történt a rendelés lezárása során!');
     }

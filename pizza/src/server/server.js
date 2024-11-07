@@ -7,6 +7,7 @@ dotenv.config();
 
 const productRoutes = require('./routes/productRoutes');
 const adminRoutes = require('./routes/adminRoutes');
+const orderRoutes = require('./routes/orderRoutes'); 
 
 // Middleware
 app.use(cors());
@@ -20,6 +21,7 @@ mongoose.connect(process.env.MONGOOSE_URI)
 // Route-ok beállítása
 app.use('/api/data', productRoutes);
 app.use('/api/admin', adminRoutes); 
+app.use('/api/userorder', orderRoutes);
 
 // Szerver indítása
 const port = process.env.PORT || 5000;
