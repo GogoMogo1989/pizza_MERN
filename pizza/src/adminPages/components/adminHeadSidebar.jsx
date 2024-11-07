@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../../auth/AuthContext';
 import AdminPopupWindows from '../pages/AdminPopupWindows';
+import { deleteAdmin } from '../../services/adminServices'
 
 function AdminHeadSidebar() {
   const navigate = useNavigate();
@@ -20,15 +21,10 @@ function AdminHeadSidebar() {
 
   const handleDelete = async (id) => {
     try {
-      const response = await fetch(`http://localhost:3000/api/admin/${id}`, {
-        method: 'DELETE',
-      });
-      if (!response.ok) {
-        throw new Error('Hiba történt a törlés során!');
-      }
-      setPopupMessage('Sikeres törlés!');
+      const result = await deleteAdmin(id);
+      setPopupMessage(result.message);
     } catch (error) {
-      setPopupMessage(`Hiba történt a törlés során! ${error.message}`);
+      setPopupMessage(error.message);
     }
   };
 

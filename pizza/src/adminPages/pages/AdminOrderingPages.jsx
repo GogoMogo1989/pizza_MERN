@@ -7,6 +7,12 @@ import { useNavigate } from "react-router-dom";
 import AdminPopupWindows from "./AdminPopupWindows";
 import { IoMdRefresh } from "react-icons/io";
 import handleDownloadInvoice from "../components/handleDownloadInvoice";
+import {
+  fetchOrders,
+  updateOrderStatus,
+  markOrderDone,
+  deleteOrder
+} from '../../services/orderServices';
 
 const AdminOrderingPage = () => {
   const [data, setData] = useState([]);
@@ -20,20 +26,16 @@ const AdminOrderingPage = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    const fetchData = async () => {
+    const loadData = async () => {
       try {
-        const response = await fetch("http://localhost:3000/api/userorder");
-        if (!response.ok) {
-          throw new Error("Hiba történt az adatok lekérdezésekor!");
-        }
-        const result = await response.json();
+        const result = await fetchOrders();
         setData(result);
       } catch (error) {
         setError(error.message);
       }
     };
 
-    fetchData();
+    loadData();
   }, [isDataRefreshed]);
 
   const filteredData = data.filter((item) => {
@@ -45,92 +47,43 @@ const AdminOrderingPage = () => {
   })
 
   const confirmActiveChange = (id) => {
-    let isActive = false;
-
-    if (orderStatus === "completed") {
-      isActive = true;
-      setPopupMessage("Biztos, hogy újra aktiválod a rendelést?");
-      setPopupWindowCancelButtonPreview(true)
-      setPopupConfirmCallback(() => () => handleActive(id, isActive));
-    } else {
-      setPopupMessage("Biztos lezárod a rendelést?");
-      setPopupWindowCancelButtonPreview(true)
-      setPopupConfirmCallback(() => () => handleActive(id, isActive));
-    }
+    let isActive = orderStatus === 'completed' ? true : false;
+    setPopupMessage(
+      isActive ? 'Biztos, hogy újra aktiválod a rendelést?' : 'Biztos lezárod a rendelést?'
+    );
+    setPopupConfirmCallback(() => () => handleActive(id, isActive));
   };
-
-  const handleDoneOrder = async (id) => {
-      try {
-        const response = await fetch(`http://localhost:3000/api/userorderdone/${id}`);
-        if (!response.ok) {
-          throw new Error("Hiba történt az adatok lekérdezésekor!");
-        }
-      } catch (error) {
-        setError(error.message);
-      } finally {
-        setPopupMessage('')
-        setPopupMessage('')
-        setPopupConfirmCallback(()=>()=>(setPopupMessage(""), setPopupNavigate("")))
-      }
-  }
- 
-  const confirmDeleteChange = (id) => {
-    setPopupMessage("Biztos, hogy törlöd a rendelést?")
-    setPopupWindowCancelButtonPreview(true)
-    setPopupConfirmCallback(() => () => handleDelete(id));
-  }
 
   const handleActive = async (id, isActive) => {
     try {
-      const response = await fetch(`http://localhost:3000/api/userorder/${id}`, {
-        method: "PUT",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ is_active: isActive }),
-      });
-
-      if (!response.ok) {
-        throw new Error("Hiba történt az adat mentése során!");
-      }
-      
+      await updateOrderStatus(id, isActive);
       setIsDataRefreshed((prev) => !prev);
-      
-      if(!isActive){
-        handleDoneOrder(id)
+      if (!isActive) {
+        await markOrderDone(id);
       }
-      
     } catch (error) {
-      console.error("Hiba történt az adat mentése során:", error);
-      setPopupMessage(`${error.message}`)
+      setPopupMessage(error.message);
     } finally {
-      setPopupMessage('')
-      setPopupMessage('')
-      setPopupConfirmCallback(()=>()=>(setPopupMessage(""), setPopupNavigate("")))
+      setPopupMessage('');
+      setPopupConfirmCallback(() => () => setPopupMessage(''));
+    }
+  };
+
+  const confirmDeleteChange = async (id) => {
+    try {
+      await deleteOrder(id);
+      setData((prevData) => prevData.filter((item) => item._id !== id));
+      setIsDataRefreshed((prev) => !prev);
+    } catch (error) {
+      setError(error.message);
+    } finally {
+      setPopupMessage('');
+      setPopupConfirmCallback(() => () => setPopupMessage(''));
     }
   };
 
   const handleStatusChange = (status) => {
     setOrderStatus(status);
-  };
-
-  const handleDelete = async (id) => {
-      try {
-        const response = await fetch(`http://localhost:3000/api/userorder/${id}`, {
-          method: "DELETE",
-        });
-        if (!response.ok) {
-          throw new Error("Hiba történt a törlés során!");
-        }
-        setData(data.filter((item) => item._id !== id));
-        setIsDataRefreshed((prev) => !prev);
-      } catch (error) {
-        setError(error.message);
-      } finally {
-        setPopupMessage('')
-        setPopupMessage('')
-        setPopupConfirmCallback(()=>()=>(setPopupMessage(""), setPopupNavigate("")))
-      }
   };
 
   const handleEdit = (id) => {

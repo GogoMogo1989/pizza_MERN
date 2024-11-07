@@ -59,4 +59,20 @@ router.delete('/:id', (req, res) => {
     .catch((err) => res.status(500).send('Hiba az adat törlésekor!'));
 });
 
+// Admin adatainak lekérdezése ID alapján
+router.get('/:id', async (req, res) => {
+  try {
+
+    const admin = await AdminModel.findById(req.params.id);
+    
+    if (!admin) {
+      return res.status(404).send('A keresett felhasználó nem található!');
+    }
+    
+    res.status(200).json(admin);
+  } catch (err) {
+    res.status(500).send('Hiba az admin adatainak lekérdezésekor!');
+  }
+});
+
 module.exports = router;

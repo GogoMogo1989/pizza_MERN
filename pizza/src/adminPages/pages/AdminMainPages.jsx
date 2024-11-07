@@ -8,6 +8,7 @@ import AdminMainSidebar from '../components/adminMainSidebar';
 import AdminPopupWindows from './AdminPopupWindows';
 import handleGeneratePDF from '../components/handleGeneratePdf';
 import { exportToExcel } from '../components/savedAtExcel';
+import { fetchData, deleteData } from '../../services/productServices'
 
 const AdminMainPage = () => {
     const [data, setData] = useState([]);
@@ -23,61 +24,44 @@ const AdminMainPage = () => {
     const navigate = useNavigate();
 
     useEffect(() => {
-        const fetchData = async () => {
-            try {
-                const response = await fetch('http://localhost:3000/api/data');
-                if (!response.ok) {
-                    throw new Error('Hiba történt az adatok lekérdezésekor!');
-                }
-                const result = await response.json();
-                setData(result);
-            } catch (error) {
-                setError(error.message);
-            }
-        };
-
-        fetchData();
-        
-    }, [isDataRefreshed]);
-
-    const confirmDeleteChange = (id) => {
-        setPopupMessage("Biztos, hogy törlöd a terméket?")
-        setPopupConfirmCallback(() => () => handleDelete(id));
-        setPopupWindowCancelButtonPreview(true)
-      }
-
-    const handleDelete = async (id) => {
-    
-        try {
-            const response = await fetch(`http://localhost:3000/api/data/${id}`, {
-                method: 'DELETE',
-            });
-            if (!response.ok) {
-                throw new Error('Hiba történt a törlés során!');
-            }
-            setData(data.filter(item => item._id !== id));
-            setIsDataRefreshed((prev) => !prev);
-        } catch (error) {
+        const loadData = async () => {
+          try {
+            const result = await fetchData();
+            setData(result);
+          } catch (error) {
             setError(error.message);
+          }
+        };
+    
+        loadData();
+      }, [isDataRefreshed]);
+    
+      const confirmDeleteChange = (id) => {
+        setPopupMessage("Biztos, hogy törlöd a terméket?");
+        setPopupConfirmCallback(() => () => handleDelete(id));
+        setPopupWindowCancelButtonPreview(true);
+      };
+    
+      const handleDelete = async (id) => {
+        try {
+          const result = await deleteData(id);
+          setData((prevData) => prevData.filter((item) => item._id !== id));
+          setIsDataRefreshed((prev) => !prev);
+        } catch (error) {
+          setError(error.message);
         } finally {
+          setPopupMessage('');
+          setPopupNavigate('');
+          setPopupConfirmCallback(() => () => {
             setPopupMessage('');
             setPopupNavigate('');
-            setPopupConfirmCallback(()=>()=>(setPopupMessage(""), setPopupNavigate("")));
-            setPopupWindowCancelButtonPreview(false)
+          });
+          setPopupWindowCancelButtonPreview(false);
         }
-
-    };
+      };
 
     const handleEdit = (id) => {
         navigate('/adminupload', { state: { id } });
-    };
-
-    const formatDate = (dateString) => {
-        const date = new Date(dateString);
-        const year = date.getFullYear();
-        const month = String(date.getMonth() + 1).padStart(2, '0');
-        const day = String(date.getDate()).padStart(2, '0');
-        return `${year}-${month}-${day}`;
     };
 
     const filteredData = data.filter(item => 
@@ -101,18 +85,7 @@ const AdminMainPage = () => {
         },
         { field: 'price', headerName: 'Ár', width: 100 }, 
         { field: 'description', headerName: 'Leírás', width: 250 }, 
-        { field: 'maincategory', headerName: 'Fő Kategória', width: 150 }, 
-        { field: 'subcategory', headerName: 'Al Kategória', width: 150 }, 
-        { 
-            field: 'date_of_publication', 
-            headerName: 'Megjelenés dátuma', 
-            width: 150, 
-            renderCell: (params) => formatDate(params.value) },
-        { 
-            field: 'date_of_upload', 
-            headerName: 'Feltöltés dátuma', 
-            width: 150, renderCell: (params) => formatDate(params.value) },
-        { field: 'number_of_items', headerName: 'Termék darabszáma', width: 150 },   
+        { field: 'category', headerName: 'Kategória', width: 150 },  
         {
             field: 'actions',
             headerName: '',
@@ -141,12 +114,8 @@ const AdminMainPage = () => {
         name: item.name,
         price: item.price,
         description: item.description,
-        maincategory: item.maincategory,
-        subcategory: item.subcategory,
+        category: item.category,
         image: item.file,
-        date_of_publication: item.date_of_publication,
-        date_of_upload: item.date_of_upload,
-        number_of_items: item.number_of_items
     }));
 
     return (

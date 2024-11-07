@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../../auth/AuthContext";
 import AdminPopupWindows from "./AdminPopupWindows";
+import { loginAdmin } from '../../services/adminServices'
 
 const AdminLogin = () => {
   const [username, setUsername] = useState("");
@@ -18,33 +19,20 @@ const AdminLogin = () => {
 
   const handleLogin = async (e) => {
     e.preventDefault();
-
+  
     if (!username || !password) {
       setPopupMessage("Kérlek add meg a felhasználó nevet és a jelszót!");
       return;
     }
-
+  
     try {
-      const response = await fetch("http://localhost:3000/api/adminlogin", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ username, password }),
-      });
-
-      if (response.ok) {
-        const data = await response.json();
-        sessionStorage.setItem("userId", data._id);
-        login();
-        setPopupMessage("Sikeres bejelentkezés!");
-        setPopupNavigate("/adminmain");
-      } else {
-        const message = await response.text();
-        setPopupMessage(`${message}`);
-      }
+      const data = await loginAdmin(username, password);
+      sessionStorage.setItem("userId", data._id);
+      login();
+      setPopupMessage("Sikeres bejelentkezés!");
+      setPopupNavigate("/adminmain");
     } catch (error) {
-      setPopupMessage(`${error}`);
+      setPopupMessage(`${error.message}`);
     }
   };
 

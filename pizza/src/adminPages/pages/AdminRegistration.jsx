@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import AdminNavbar from "../components/adminNavbar";
 import AdminPopupWindows from "./AdminPopupWindows";
+import { fetchAllAdmins, fetchAdminById, registerAdmin } from "../../services/adminServices";
 
 const AdminRegistration = () => {
   const [username, setUsername] = useState("");
@@ -39,34 +40,18 @@ const AdminRegistration = () => {
     }
 
     try {
-      await saveData();
+      const adminData = {
+        username,
+        password,
+        email,
+        masterKey,
+      };
+      const response = await registerAdmin(adminData);
+      setPopupMessage(response.message);
+      setPopupNavigate("/adminlogin");
     } catch (error) {
       setPopupMessage(`${error}`);
     }
-  };
-
-  const saveData = async () => {
-    const adminData = {
-      username,
-      password,
-      email,
-      masterKey,
-    };
-
-    const url = "http://localhost:3000/api/adminregistration";
-    const response = await fetch(url, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(adminData),
-    });
-
-    if (!response.ok) {
-      throw new Error("Hiba történt az adat mentése során!");
-    }
-    setPopupMessage("Sikeres regisztráció!");
-    setPopupNavigate("/adminlogin");
   };
 
   const handleBack = () => {
@@ -76,34 +61,23 @@ const AdminRegistration = () => {
   };
 
   useEffect(() => {
-    const fetchData = async () => {
+    const loadAdmins = async () => {
       try {
-        const response = await fetch("http://localhost:3000/api/admin");
-        if (!response.ok) {
-          throw new Error("Hiba történt az admin adatok lekérdezésekor!");
-        }
-        const result = await response.json();
+        const result = await fetchAllAdmins();
         setAdminNames(result.map((admin) => admin.username));
       } catch (error) {
         setPopupMessage(`${error}`);
       }
     };
 
-    fetchData();
+    loadAdmins();
   }, []);
 
   useEffect(() => {
     if (location.state && location.state.id) {
-      // Ha van ID, akkor töltsük be az Admin adatait
-      const fetchItem = async () => {
+      const loadAdminData = async () => {
         try {
-          const response = await fetch(
-            `http://localhost:3000/api/admin/${location.state.id}`
-          );
-          if (!response.ok) {
-            throw new Error("Hiba történt a termék adatainak lekérdezésekor!");
-          }
-          const item = await response.json();
+          const item = await fetchAdminById(location.state.id);
           setItemId(item._id);
           setUsername(item.username);
           setEmail(item.email);
@@ -111,7 +85,7 @@ const AdminRegistration = () => {
           setPopupMessage(`${error}`);
         }
       };
-      fetchItem();
+      loadAdminData();
     }
   }, [location.state]);
 

@@ -1,8 +1,8 @@
-
 import React, { useState, useEffect } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import AdminNavbar from "../components/adminNavbar";
 import AdminPopupWindows from "./AdminPopupWindows";
+import { fetchOrderById, updateOrderById } from '../../services/orderServices';
 
 const AdminOrderingEdit = () => {
     const location = useLocation();
@@ -25,65 +25,54 @@ const AdminOrderingEdit = () => {
     const [popupWindowCancelButtonPreview, setPopupWindowCancelButtonPreview] = useState(false)
 
     useEffect(() => {
-        const fetchItem = async () => {
-            try {
-                const response = await fetch(`http://localhost:3000/api/userorder/${location.state.id}`);
-                if (!response.ok) {
-                    throw new Error("Hiba történt a termék adatainak lekérdezésekor!");
-                }
-                const item = await response.json();
-                setName(item.name);
-                setPrice(item.price);
-                setEmail(item.email);
-                setPhoneNumber(item.phone_number);
-                setTrackingName(item.tracking_name);
-                setZipCode(item.zip_code);
-                setCountry(item.country);
-                setAddress(item.address);
-                setOrderData(item.ordered_data);
-                setOrderNumber(item.order_number)
-                setTypeOfDelivery(item.type_of_delivery)
-                setTypeOfPaid(item.type_of_paid)
-            } catch (error) {
-                console.error("Hiba a termék adatainak betöltése során:", error);
-            }
+        const loadOrder = async () => {
+          try {
+            const item = await fetchOrderById(location.state.id);
+            setName(item.name);
+            setPrice(item.price);
+            setEmail(item.email);
+            setPhoneNumber(item.phone_number);
+            setTrackingName(item.tracking_name);
+            setZipCode(item.zip_code);
+            setCountry(item.country);
+            setAddress(item.address);
+            setOrderData(item.ordered_data);
+            setOrderNumber(item.order_number);
+            setTypeOfDelivery(item.type_of_delivery);
+            setTypeOfPaid(item.type_of_paid);
+          } catch (error) {
+            console.error('Hiba a termék adatainak betöltése során:', error);
+          }
         };
-        fetchItem();
-    }, [location.state.id]);
-
-    const handleSubmit = async (event) => {
+    
+        loadOrder();
+      }, [location.state.id]);
+    
+      const handleSubmit = async (event) => {
         event.preventDefault();
         try {
-            const response = await fetch(`http://localhost:3000/api/userorder/${location.state.id}`, {
-                method: "PUT",
-                headers: {
-                    "Content-Type": "application/json",
-                },
-                body: JSON.stringify({
-                    name,
-                    price,
-                    email,
-                    phone_number,
-                    tracking_name,
-                    zip_code,
-                    country,
-                    address,
-                    ordered_data,
-                    order_number,
-                    type_of_delivery: typeOfDelivery,
-                    type_of_paid: typeOfPaid
-                }),
-            });
-
-            if (!response.ok) {
-                throw new Error("Hiba történt a rendelés frissítése során!");
-            }
-            setPopupMessage("A rendelés sikeresen frissítve!")
-            setPopupNavigate("/adminordering")
+          const orderData = {
+            name,
+            price,
+            email,
+            phone_number: phone_number,
+            tracking_name: tracking_name,
+            zip_code: zip_code,
+            country,
+            address,
+            ordered_data: orderData,
+            order_number: order_number,
+            type_of_delivery: typeOfDelivery,
+            type_of_paid: typeOfPaid,
+          };
+    
+          await updateOrderById(location.state.id, orderData);
+          setPopupMessage('A rendelés sikeresen frissítve!');
+          setPopupNavigate('/adminordering');
         } catch (error) {
-            setPopupMessage(`Hiba történt a rendelés frissítése során: ${error}!`)
+          setPopupMessage(`Hiba történt a rendelés frissítése során: ${error.message}`);
         }
-    };
+      };
 
     return (
         <div>

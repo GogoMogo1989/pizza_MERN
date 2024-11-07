@@ -2,19 +2,23 @@ const express = require('express');
 const router = express.Router();
 const DataModel = require('../models/product');
 
-// Termék feltöltése
 router.post('/', (req, res) => {
   const { file, name, price, description, category } = req.body;
 
-  if (!req.body || !file) {
-    return res.status(400).send('Nincs fájl az adatokban!');
+  if (!file || !category) {
+    return res.status(400).send('Nincs fájl vagy kategória az adatokban!');
   }
 
   const data = new DataModel({ file, name, price, description, category });
 
   data.save()
-    .then(() => res.status(200).send('Adatok sikeresen fogadva és mentve a szerveren.'))
-    .catch((err) => res.status(500).send('Hiba az adatok mentésekor!'));
+    .then(() => {
+      return res.status(200).send('Adatok sikeresen fogadva és mentve a szerveren.');
+    })
+    .catch((err) => {
+      console.error('Hiba az adatok mentésekor:', err);
+      return res.status(500).send('Hiba az adatok mentésekor!');
+    });
 });
 
 // Termékek lekérdezése
