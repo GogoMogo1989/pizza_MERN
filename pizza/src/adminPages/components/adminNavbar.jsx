@@ -18,8 +18,8 @@ function AdminNavbar() {
   return (
     <nav className="bg-gray-800 p-5 shadow-md fixed top-0 left-0 w-full z-50">
       <div className="flex justify-between items-center">
-        <Link to="/" className="text-white text-xl font-bold">
-          Silverland
+        <Link to="/usermain" className="text-white text-xl font-bold">
+          Best Pizza
         </Link>
         <div className="flex space-x-4 ml-auto">
           <Link 

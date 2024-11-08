@@ -35,6 +35,14 @@ const UserHeadBar = () => {
         >
           About Us
         </Link>
+        <Link
+          to="landing"
+          smooth={true}
+          duration={500}
+          className="text-white hover:text-yellow-300 transition duration-200 cursor-pointer"
+        >
+          Menu
+        </Link>
       </div>
 
       <div className="flex gap-4 items-center">
