@@ -9,6 +9,7 @@ import ProtectedRoute from "./auth/ProtectedRoute"
 import { AuthProvider } from "./auth/AuthContext"
 import AdminOrderingPages from "./adminPages/pages/AdminOrderingPages"
 import AdminOrderingEdit from "./adminPages/pages/AdminOrderingEdit"
+import Layout from './userPages/pages/Layout';
 
 function App() {
   return (
@@ -37,6 +38,10 @@ function App() {
               <Route
                 path="/adminorderingedit"
                 element={<ProtectedRoute element={<AdminOrderingEdit />} />}
+              />
+              <Route 
+                path="/usermain"
+                element={<Layout />}
               />
             </Routes>
           </div>
