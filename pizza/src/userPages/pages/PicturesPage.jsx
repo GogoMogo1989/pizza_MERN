@@ -8,7 +8,7 @@ import woodenTexture from '../../assets/wooden-texture.jpg';
 const PicturesPage = () => {
   return (
     <div 
-      className="w-full h-[150vh] bg-cover bg-center relative" 
+      className="w-full h-[180vh] bg-cover bg-center relative" 
       style={{ backgroundImage: `url(${woodenTexture})` }} 
     >
       <div className="absolute top-0 left-0 w-full h-full">
@@ -29,13 +29,13 @@ const PicturesPage = () => {
           <img
             src={image3}
             alt="Pizza 3"
-            className="absolute bottom-24 right-20 w-1/3 h-auto object-cover rounded-lg shadow-lg"
+            className="absolute bottom-72 right-20 w-1/3 h-auto object-cover rounded-lg shadow-lg"
           />
     
           <img
             src={image1}
             alt="Pizza 4"
-            className="absolute bottom-2 left-80 w-1/3 h-auto object-cover rounded-lg shadow-lg"
+            className="absolute bottom-40 left-80 w-1/3 h-auto object-cover rounded-lg shadow-lg"
           />
         </div>
       </div>
