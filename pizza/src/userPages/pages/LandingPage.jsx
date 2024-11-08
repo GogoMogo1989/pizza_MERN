@@ -1,5 +1,6 @@
 import React from 'react';
 import Slider from 'react-slick'; 
+import { Link } from 'react-scroll';  
 import backgroundImage1 from '../../assets/Pizza1.png';
 import backgroundImage2 from '../../assets/Pizza2.png';
 import backgroundImage3 from '../../assets/Pizza3.png';
@@ -23,8 +24,20 @@ const LandingPage = () => {
         <h2 className="text-4xl font-bold mb-4">Delicious Pizzas Await!</h2>
         <p className="text-xl mb-6">Choose your favorite pizza from our menu.</p>
         <div className="flex gap-4">
-          <button className="bg-yellow-500 hover:bg-yellow-600 text-black py-2 px-4 rounded-full">Menu</button>
-          <button className="bg-red-500 hover:bg-red-600 text-white py-2 px-4 rounded-full">About Us</button>
+          <Link
+             to="landing"
+             smooth={true}
+             duration={500}
+          >
+            <button className="bg-yellow-500 hover:bg-yellow-600 text-black py-2 px-4 rounded-full">Menu</button>
+          </Link>
+          <Link
+             to="about-us"
+             smooth={true}
+             duration={500}
+          >
+            <button className="bg-red-500 hover:bg-red-600 text-white py-2 px-4 rounded-full">About Us</button>
+          </Link>
         </div>
       </div>
       

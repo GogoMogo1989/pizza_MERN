@@ -15,7 +15,7 @@ const PicturesPage = () => {
         <div className="relative w-full h-full">
       
           <img
-            src={image1}
+            src={image4}
             alt="Pizza 1"
             className="absolute top-40 left-10 w-1/3 h-auto object-cover rounded-lg shadow-lg"
           />
@@ -33,7 +33,7 @@ const PicturesPage = () => {
           />
     
           <img
-            src={image4}
+            src={image1}
             alt="Pizza 4"
             className="absolute bottom-2 left-80 w-1/3 h-auto object-cover rounded-lg shadow-lg"
           />

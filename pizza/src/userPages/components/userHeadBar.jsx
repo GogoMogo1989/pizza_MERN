@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-scroll';  
 import { FaUser, FaShoppingCart } from 'react-icons/fa';
 import logo from '../../assets/Pizza-logo-design-template-Vector-PNG.png';
 
@@ -10,12 +11,30 @@ const UserHeadBar = () => {
       </div>
 
       <div className="flex gap-8">
-        <button className="text-white hover:text-yellow-300 transition duration-200">
-          Menu
-        </button>
-        <button className="text-white hover:text-yellow-300 transition duration-200">
+        <Link
+          to="landing"
+          smooth={true}
+          duration={500}
+          className="text-white hover:text-yellow-300 transition duration-200 cursor-pointer"
+        >
+          Home
+        </Link>
+        <Link
+          to="restaurants"
+          smooth={true}
+          duration={500}
+          className="text-white hover:text-yellow-300 transition duration-200 cursor-pointer"
+        >
           Restaurants
-        </button>
+        </Link>
+        <Link
+          to="about-us"
+          smooth={true}
+          duration={500}
+          className="text-white hover:text-yellow-300 transition duration-200 cursor-pointer"
+        >
+          About Us
+        </Link>
       </div>
 
       <div className="flex gap-4 items-center">
@@ -34,6 +53,6 @@ const UserHeadBar = () => {
       </div>
     </div>
   );
-}
+};
 
 export default UserHeadBar;
