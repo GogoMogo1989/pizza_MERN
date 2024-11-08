@@ -1,5 +1,5 @@
 import React from 'react';
-import UserHeadBar from "../components/userHeadBar";
+import UserNavbar from "../components/userNavbar";
 import LandingPage from "./LandingPage";
 import AboutUsPage from "./AboutUsPage";
 import RestaurantsPage from "./RestaurantsPage";
@@ -10,7 +10,7 @@ const Layout = () => {
   return (
     <div className="Layout">
 
-      <UserHeadBar /> 
+      <UserNavbar /> 
     
       <div id="landing">
         <LandingPage />
