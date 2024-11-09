@@ -27,12 +27,36 @@ const UserNavbar = () => {
               Home
             </Link>
             <Link
-              onClick={() => navigate('/menu')}
+              to='pizza'
               smooth={true}
               duration={500}
               className="text-white hover:text-yellow-300 transition duration-200 cursor-pointer"
             >
-              Menu
+              Pizza
+            </Link>
+            <Link
+              to='salad'
+              smooth={true}
+              duration={500}
+              className="text-white hover:text-yellow-300 transition duration-200 cursor-pointer"
+            >
+              Salad
+            </Link>
+            <Link
+              to='dessert'
+              smooth={true}
+              duration={500}
+              className="text-white hover:text-yellow-300 transition duration-200 cursor-pointer"
+            >
+              Dessert
+            </Link>
+            <Link
+              to='drink'
+              smooth={true}
+              duration={500}
+              className="text-white hover:text-yellow-300 transition duration-200 cursor-pointer"
+            >
+              Drink
             </Link>
           </>
         ) : (
