@@ -10,6 +10,7 @@ import { AuthProvider } from "./auth/AuthContext"
 import AdminOrderingPages from "./adminPages/pages/AdminOrderingPages"
 import AdminOrderingEdit from "./adminPages/pages/AdminOrderingEdit"
 import Layout from './userPages/pages/Layout';
+import LayoutMenu from './userPages/pages/LayoutMenu';
 
 function App() {
   return (
@@ -42,6 +43,10 @@ function App() {
               <Route 
                 path="/usermain"
                 element={<Layout />}
+              />
+              <Route 
+                path="/menu"
+                element={<LayoutMenu />}
               />
             </Routes>
           </div>

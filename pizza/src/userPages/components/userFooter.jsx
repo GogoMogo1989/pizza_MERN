@@ -45,7 +45,7 @@ const UserFooter = () => {
                             <li className="hover:text-yellow-400">Home</li>
                         </Link>
                         <Link
-                             to="landing"
+                             to="menu"
                              smooth={true}
                              duration={500}
                              className="text-white hover:text-yellow-300 transition duration-200 cursor-pointer"

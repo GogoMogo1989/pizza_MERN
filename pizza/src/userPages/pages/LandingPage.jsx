@@ -25,7 +25,7 @@ const LandingPage = () => {
         <p className="text-xl mb-6">Choose your favorite pizza from our menu.</p>
         <div className="flex gap-4">
           <Link
-             to="landing"
+             to="menu"
              smooth={true}
              duration={500}
           >

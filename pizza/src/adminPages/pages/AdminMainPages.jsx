@@ -138,7 +138,7 @@ const AdminMainPage = () => {
                             <FaFileExcel size={20} className="text-green-500" />
                         </button>
                     </div>
-                    <div className='h-550 w-1100 fixed' >
+                    <div className='h-screen overflow-auto' >
                         <DataGrid
                             rows={rows}
                             columns={columns}

@@ -1,9 +1,14 @@
 import React from 'react';
 import { Link } from 'react-scroll';  
+import { useNavigate, useLocation } from 'react-router-dom';
 import { FaUser, FaShoppingCart } from 'react-icons/fa';
 import logo from '../../assets/Pizza-logo-design-template-Vector-PNG.png';
 
 const UserNavbar = () => {
+
+  const navigate = useNavigate()
+  const location = useLocation()
+
   return (
     <div className="flex justify-between items-center p-2 bg-black text-white h-14 fixed top-0 left-0 right-0 z-50">
       <div>
@@ -11,38 +16,61 @@ const UserNavbar = () => {
       </div>
 
       <div className="flex gap-8">
-        <Link
-          to="landing"
-          smooth={true}
-          duration={500}
-          className="text-white hover:text-yellow-300 transition duration-200 cursor-pointer"
-        >
-          Home
-        </Link>
-        <Link
-          to="restaurants"
-          smooth={true}
-          duration={500}
-          className="text-white hover:text-yellow-300 transition duration-200 cursor-pointer"
-        >
-          Restaurants
-        </Link>
-        <Link
-          to="about-us"
-          smooth={true}
-          duration={500}
-          className="text-white hover:text-yellow-300 transition duration-200 cursor-pointer"
-        >
-          About Us
-        </Link>
-        <Link
-          to="landing"
-          smooth={true}
-          duration={500}
-          className="text-white hover:text-yellow-300 transition duration-200 cursor-pointer"
-        >
-          Menu
-        </Link>
+      {location.pathname === '/menu' ? (
+          <>
+            <Link
+              onClick={() => navigate('/usermain')}
+              smooth={true}
+              duration={500}
+              className="text-white hover:text-yellow-300 transition duration-200 cursor-pointer"
+            >
+              Home
+            </Link>
+            <Link
+              onClick={() => navigate('/menu')}
+              smooth={true}
+              duration={500}
+              className="text-white hover:text-yellow-300 transition duration-200 cursor-pointer"
+            >
+              Menu
+            </Link>
+          </>
+        ) : (
+          <>
+            <Link
+              to="landing"
+              smooth={true}
+              duration={500}
+              className="text-white hover:text-yellow-300 transition duration-200 cursor-pointer"
+            >
+              Home
+            </Link>
+            <Link
+              to="restaurants"
+              smooth={true}
+              duration={500}
+              className="text-white hover:text-yellow-300 transition duration-200 cursor-pointer"
+            >
+              Restaurants
+            </Link>
+            <Link
+              to="about-us"
+              smooth={true}
+              duration={500}
+              className="text-white hover:text-yellow-300 transition duration-200 cursor-pointer"
+            >
+              About Us
+            </Link>
+            <Link
+              onClick={() => navigate('/menu')}
+              smooth={true}
+              duration={500}
+              className="text-white hover:text-yellow-300 transition duration-200 cursor-pointer"
+            >
+              Menu
+            </Link>
+          </>
+        )}
       </div>
 
       <div className="flex gap-4 items-center">
