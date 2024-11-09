@@ -18,14 +18,12 @@ const UserNavbar = () => {
       <div className="flex gap-8">
       {location.pathname === '/menu' ? (
           <>
-            <Link
+            <button
               onClick={() => navigate('/usermain')}
-              smooth={true}
-              duration={500}
               className="text-white hover:text-yellow-300 transition duration-200 cursor-pointer"
             >
               Főoldal
-            </Link>
+            </button>
             <Link
               to='pizza'
               smooth={true}
@@ -85,14 +83,12 @@ const UserNavbar = () => {
             >
               Rólunk
             </Link>
-            <Link
+            <button
               onClick={() => navigate('/menu')}
-              smooth={true}
-              duration={500}
               className="text-white hover:text-yellow-300 transition duration-200 cursor-pointer"
             >
               Étlap
-            </Link>
+            </button>
           </>
         )}
       </div>

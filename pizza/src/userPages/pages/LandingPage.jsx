@@ -1,12 +1,15 @@
 import React from 'react';
 import Slider from 'react-slick'; 
 import { Link } from 'react-scroll';  
+import { useNavigate } from 'react-router-dom';
 import backgroundImage1 from '../../assets/Pizza1.png';
 import backgroundImage2 from '../../assets/Pizza2.png';
 import backgroundImage3 from '../../assets/Pizza3.png';
 import woodenTexture from '../../assets/wooden-texture.jpg';
 
 const LandingPage = () => {
+
+  const navigate = useNavigate()
 
   const settings = {
     dots: true, 
@@ -24,13 +27,12 @@ const LandingPage = () => {
         <h2 className="text-4xl font-bold mb-4">Ínycsiklandozó pizzáink csak rád várnak!</h2>
         <p className="text-xl mb-6">Válaszd ki a kedvenc pizzádat az étlapunkról!</p>
         <div className="flex gap-4">
-          <Link
-             to="menu"
-             smooth={true}
-             duration={500}
+          <button
+            onClick={() => navigate('/menu')} 
+            className="bg-yellow-500 hover:bg-yellow-600 text-black py-2 px-4 rounded-full"
           >
-            <button className="bg-yellow-500 hover:bg-yellow-600 text-black py-2 px-4 rounded-full">Étlap</button>
-          </Link>
+            Étlap
+          </button>
           <Link
              to="about-us"
              smooth={true}
