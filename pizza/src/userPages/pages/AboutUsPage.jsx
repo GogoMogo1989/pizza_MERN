@@ -35,10 +35,10 @@ const AboutUsPage = () => {
           ref={textRef}
           className={`text-4xl font-bold text-yellow-500 mb-4 transition-opacity duration-1000 ${textOpacity}`}
         >
-          About Us
+          Rólunk
         </h2>
         <p className={`text-xl text-white transition-opacity duration-1000 ${textOpacity}`}>
-          We are a passionate team dedicated to bringing you the best culinary experience. Our head chef, with years of experience, is committed to crafting exquisite dishes with the freshest ingredients. We pride ourselves on serving authentic, mouth-watering pizzas that will leave you craving for more. Our mission is to deliver top-quality food with exceptional service to our valued customers.
+          Mi egy szenvedélyes csapat vagyunk, akik arra törekszünk, hogy a legjobb kulináris élményt nyújtsuk nektek. Főszakácsunk, aki több éves tapasztalattal rendelkezik, elkötelezetten dolgozik azon, hogy a friss hozzávalókból ínycsiklandó ételeket készítsen. Büszkék vagyunk arra, hogy autentikus, ínycsiklandó pizzákat szolgálunk fel, amelyek után garantáltan újra ránk fogtok gondolni. Küldetésünk, hogy kiváló minőségű ételeket és páratlan szolgáltatást biztosítsunk megbecsült vendégeink számára.
         </p>
       </div>
     </div>

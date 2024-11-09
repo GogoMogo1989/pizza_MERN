@@ -1,64 +1,60 @@
 import React from 'react';
 import { Link } from 'react-scroll';  
+import { useNavigate } from 'react-router-dom';
 
 const UserFooter = () => {
+
+    const navigate = useNavigate()
+
     return (
         <div className="bg-black text-white p-8">
          
             <div className="text-center mb-6">
-                <p className="text-sm">&copy; 2024 Best Pizza Co. All Rights Reserved.</p>
+                <p className="text-sm">&copy; 2024 Best Pizza Co. Minden jog fenntartva.</p>
             </div>
 
             <div className="flex justify-around mb-8">
                 <div className="flex flex-col items-center">
-                    <h3 className="text-xl font-semibold mb-2">Best Pizza Milan</h3>
-                    <p className="text-sm">Phone: +123 456 7890</p>
+                    <h3 className="text-xl font-semibold mb-2">Best Pizza Budapest</h3>
+                    <p className="text-sm">Telefon: +123 456 7890</p>
                     <p className="text-sm">
-                        <a href="mailto:contact@bestpizzamilan.com" className="text-blue-400 hover:underline">
-                            Email: contact@bestpizzamilan.com
+                        <a href="mailto:contact@bestpizzabudapest.com" className="text-blue-400 hover:underline">
+                            E-mail: contact@bestpizzabudapest.com
                         </a>
                     </p>
-                    <p className="text-sm">Address: Via della Pizza 12, 20100 Milan, Italy</p>
+                    <p className="text-sm">Cím: Andrássy Út 45, 1061 Budapest, Magyarország</p>
                 </div>
                 <div className="flex flex-col items-center">
-                    <h3 className="text-xl font-semibold mb-2">Best Pizza Rome</h3>
-                    <p className="text-sm">Phone: +987 654 3210</p>
+                    <h3 className="text-xl font-semibold mb-2">Best Pizza Budapest 2</h3>
+                    <p className="text-sm">Telefon: +987 654 3210</p>
                     <p className="text-sm">
-                        <a href="mailto:contact@bestpizzarome.com" className="text-blue-400 hover:underline">
-                            Email: contact@bestpizzarome.com
+                        <a href="mailto:contact@bestpizzabudapest2.com" className="text-blue-400 hover:underline">
+                            E-mail: contact@bestpizzabudapest2.com
                         </a>
                     </p>
-                    <p className="text-sm">Address: Piazza della Pizza 8, 00100 Rome, Italy</p>
+                    <p className="text-sm">Cím: Rákóczi Út 12, 1088 Budapest, Magyarország</p>
                 </div>
             </div>
 
             <div className="flex justify-around mb-8">
                 <div className="flex flex-col items-center">
-                    <h3 className="text-xl font-semibold mb-4">Quick Links</h3>
+                    <h3 className="text-xl font-semibold mb-4">Gyors linkek</h3>
                     <ul className="text-sm space-y-2">
                         <Link
-                            to="landing"
+                            onClick={()=>navigate("/usermain")}
                             smooth={true}
                             duration={500}
                             className="text-white hover:text-yellow-300 transition duration-200 cursor-pointer"
                         >
-                            <li className="hover:text-yellow-400">Home</li>
+                            <li className="hover:text-yellow-400">Főoldal</li>
                         </Link>
                         <Link
-                             to="menu"
+                             onClick={()=>navigate("/menu")}
                              smooth={true}
                              duration={500}
                              className="text-white hover:text-yellow-300 transition duration-200 cursor-pointer"
                         >
-                            <li className="hover:text-yellow-400">Menu</li>
-                        </Link>
-                        <Link
-                             to="restaurants"
-                             smooth={true}
-                             duration={500}
-                             className="text-white hover:text-yellow-300 transition duration-200 cursor-pointer"
-                        >
-                            <li className="hover:text-yellow-400">Restaurants</li>
+                            <li className="hover:text-yellow-400">Étlap</li>
                         </Link>
                         <Link
                              to="landing"
@@ -66,13 +62,13 @@ const UserFooter = () => {
                              duration={500}
                              className="text-white hover:text-yellow-300 transition duration-200 cursor-pointer"
                         >
-                            <li className="hover:text-yellow-400">Contact Us</li>
+                            <li className="hover:text-yellow-400">Elérhetőségeink</li>
                         </Link>
                     </ul>
                 </div>
 
                 <div className="flex flex-col items-center">
-                    <h3 className="text-xl font-semibold mb-4">Site Map</h3>
+                    <h3 className="text-xl font-semibold mb-4">Webhelytérkép</h3>
                     <ul className="text-sm space-y-2">
                         <Link
                              to="about-us"
@@ -80,7 +76,7 @@ const UserFooter = () => {
                              duration={500}
                              className="text-white hover:text-yellow-300 transition duration-200 cursor-pointer"
                         >
-                            <li className="hover:text-yellow-400">About Us</li>
+                            <li className="hover:text-yellow-400">Rólunk</li>
                         </Link>
                         <Link
                              to="landing"
@@ -88,7 +84,7 @@ const UserFooter = () => {
                              duration={500}
                              className="text-white hover:text-yellow-300 transition duration-200 cursor-pointer"
                         >
-                            <li className="hover:text-yellow-400">FAQ</li>
+                            <li className="hover:text-yellow-400">GYIK</li>
                         </Link>
                         <Link
                              to="landing"
@@ -96,7 +92,7 @@ const UserFooter = () => {
                              duration={500}
                              className="text-white hover:text-yellow-300 transition duration-200 cursor-pointer"
                         >
-                            <li className="hover:text-yellow-400">Privacy Policy</li>
+                            <li className="hover:text-yellow-400">Adatvédelmi irányelvek</li>
                         </Link>
                         <Link
                              to="landing"
@@ -104,14 +100,14 @@ const UserFooter = () => {
                              duration={500}
                              className="text-white hover:text-yellow-300 transition duration-200 cursor-pointer"
                         >
-                            <li className="hover:text-yellow-400">Terms of Service</li>
+                            <li className="hover:text-yellow-400">Szolgáltatási feltételek</li>
                         </Link>
                     </ul>
                 </div>
             </div>
 
             <div className="text-center mt-8 mb-4">
-                <p className="text-sm mb-2">Follow us:</p>
+                <p className="text-sm mb-2">Kövess minket:</p>
                 <div className="flex justify-center gap-6">
                     <a href="#" className="text-yellow-400 hover:text-yellow-500">Facebook</a>
                     <a href="#" className="text-yellow-400 hover:text-yellow-500">Instagram</a>
@@ -127,7 +123,7 @@ const UserFooter = () => {
                             duration={500}
                             className="text-white hover:text-yellow-300 transition duration-200 cursor-pointer"
                     >
-                        <li className="hover:text-yellow-400">Privacy Policy</li>
+                        <li className="hover:text-yellow-400">Adatvédelmi irányelvek</li>
                     </Link>
                     <Link
                             to="landing"
@@ -135,7 +131,7 @@ const UserFooter = () => {
                             duration={500}
                             className="text-white hover:text-yellow-300 transition duration-200 cursor-pointer"
                     >
-                        <li className="hover:text-yellow-400">Terms of Service</li>
+                        <li className="hover:text-yellow-400">Szolgáltatási feltételek</li>
                     </Link>
                 </ul>
             </div>

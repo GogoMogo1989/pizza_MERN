@@ -21,22 +21,22 @@ const LandingPage = () => {
   return (
     <div className="w-full h-screen bg-cover bg-center flex pt-16" style={{ backgroundImage: `url(${woodenTexture})` }}>
       <div className="flex flex-col justify-center items-start w-1/2 px-8 text-white">
-        <h2 className="text-4xl font-bold mb-4">Delicious Pizzas Await!</h2>
-        <p className="text-xl mb-6">Choose your favorite pizza from our menu.</p>
+        <h2 className="text-4xl font-bold mb-4">Ínycsiklandozó pizzáink csak rád várnak!</h2>
+        <p className="text-xl mb-6">Válaszd ki a kedvenc pizzádat az étlapunkról!</p>
         <div className="flex gap-4">
           <Link
              to="menu"
              smooth={true}
              duration={500}
           >
-            <button className="bg-yellow-500 hover:bg-yellow-600 text-black py-2 px-4 rounded-full">Menu</button>
+            <button className="bg-yellow-500 hover:bg-yellow-600 text-black py-2 px-4 rounded-full">Étlap</button>
           </Link>
           <Link
              to="about-us"
              smooth={true}
              duration={500}
           >
-            <button className="bg-red-500 hover:bg-red-600 text-white py-2 px-4 rounded-full">About Us</button>
+            <button className="bg-red-500 hover:bg-red-600 text-white py-2 px-4 rounded-full">Rólunk</button>
           </Link>
         </div>
       </div>

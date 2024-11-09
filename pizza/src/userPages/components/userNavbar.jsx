@@ -24,7 +24,7 @@ const UserNavbar = () => {
               duration={500}
               className="text-white hover:text-yellow-300 transition duration-200 cursor-pointer"
             >
-              Home
+              Főoldal
             </Link>
             <Link
               to='pizza'
@@ -32,7 +32,7 @@ const UserNavbar = () => {
               duration={500}
               className="text-white hover:text-yellow-300 transition duration-200 cursor-pointer"
             >
-              Pizza
+              Pizzák
             </Link>
             <Link
               to='salad'
@@ -40,7 +40,7 @@ const UserNavbar = () => {
               duration={500}
               className="text-white hover:text-yellow-300 transition duration-200 cursor-pointer"
             >
-              Salad
+              Saláták
             </Link>
             <Link
               to='dessert'
@@ -48,7 +48,7 @@ const UserNavbar = () => {
               duration={500}
               className="text-white hover:text-yellow-300 transition duration-200 cursor-pointer"
             >
-              Dessert
+              Deszertek
             </Link>
             <Link
               to='drink'
@@ -56,7 +56,7 @@ const UserNavbar = () => {
               duration={500}
               className="text-white hover:text-yellow-300 transition duration-200 cursor-pointer"
             >
-              Drink
+              Italok
             </Link>
           </>
         ) : (
@@ -67,7 +67,7 @@ const UserNavbar = () => {
               duration={500}
               className="text-white hover:text-yellow-300 transition duration-200 cursor-pointer"
             >
-              Home
+              Főoldal
             </Link>
             <Link
               to="restaurants"
@@ -75,7 +75,7 @@ const UserNavbar = () => {
               duration={500}
               className="text-white hover:text-yellow-300 transition duration-200 cursor-pointer"
             >
-              Restaurants
+              Éttermeink
             </Link>
             <Link
               to="about-us"
@@ -83,7 +83,7 @@ const UserNavbar = () => {
               duration={500}
               className="text-white hover:text-yellow-300 transition duration-200 cursor-pointer"
             >
-              About Us
+              Rólunk
             </Link>
             <Link
               onClick={() => navigate('/menu')}
@@ -91,7 +91,7 @@ const UserNavbar = () => {
               duration={500}
               className="text-white hover:text-yellow-300 transition duration-200 cursor-pointer"
             >
-              Menu
+              Étlap
             </Link>
           </>
         )}

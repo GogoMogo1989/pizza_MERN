@@ -32,18 +32,18 @@ const RestaurantsPage = () => {
                     </div>
                     
                     <div ref={textRef} className={`w-1/2 pl-8 text-white transition-opacity duration-1000 ${textOpacity}`} >
-                        <h2 className="text-4xl font-bold text-yellow-500 mb-4">Best Pizza Milan</h2>
+                        <h2 className="text-4xl font-bold text-yellow-500 mb-4">Best Pizza Budapest</h2>
                         <p className="text-xl mb-6" >
-                        Experience the finest Italian cuisine at Best Pizza Milan. With traditional recipes passed down through generations, every dish is crafted with love and the freshest ingredients. Come and enjoy the best pizza in Milan, where every bite tells the story of Italy’s rich culinary tradition.
+                        Élvezze a legfinomabb olasz ételeket a Best Pizza Budapest étteremben. Hagyományos receptekkel, generációkon át öröklődő módszerekkel készítjük el ételeinket, mindig friss alapanyagokkal. Jöjjön és élvezze a legjobb pizzát Budapesten, ahol minden falat Itália gazdag kulináris hagyományát meséli el.
                         </p>
-                        <p className="text-lg font-semibold">Contact:</p>
-                        <p className="text-lg">Phone: +123 456 7890</p>
-                        <p className="text-lg">Email: contact@bestpizzamilan.com</p>
-                        <p className="text-lg">Address: Via della Pizza 12, 20100 Milan, Italy</p>
+                        <p className="text-lg font-semibold">Kapcsolat:</p>
+                        <p className="text-lg">Telefon: +36 1 234 5678</p>
+                        <p className="text-lg">E-mail: contact@bestpizzabudapest.com</p>
+                        <p className="text-lg">Cím: Andrássy út 12, 1061 Budapest, Magyarország</p>
                     </div>
-                    </div>
+                </div>
 
-                    <div className="flex items-center flex-row-reverse mb-12">
+                <div className="flex items-center flex-row-reverse mb-12">
                     <div className="w-1/2 flex justify-center">
                         <img 
                         ref={chefRef}
@@ -54,14 +54,14 @@ const RestaurantsPage = () => {
                     </div>
 
                     <div className={`w-1/2 pr-8 text-white transition-opacity duration-1000 ${textOpacity}`} >
-                        <h2 className="text-4xl font-bold text-yellow-500 mb-4">Best Pizza Rome</h2>
+                        <h2 className="text-4xl font-bold text-yellow-500 mb-4">Best Pizza Buda</h2>
                         <p className="text-xl mb-6">
-                        At Best Pizza Rome, we offer a modern twist on classic dishes, focusing on local ingredients and contemporary techniques. Our restaurant is the perfect blend of tradition and innovation, serving unforgettable pizzas that capture the essence of Rome.
+                        A Best Pizza Buda étteremben a klasszikus ételek modern változatait kínáljuk, helyi alapanyagokra és kortárs technikákra fókuszálva. Éttermünk tökéletes keveréke a hagyományoknak és az innovációnak, és olyan felejthetetlen pizzákat szolgálunk fel, amelyek megidézik Buda esszenciáját.
                         </p>
-                        <p className="text-lg font-semibold">Contact:</p>
-                        <p className="text-lg">Phone: +987 654 3210</p>
-                        <p className="text-lg">Email: contact@bestpizzarome.com</p>
-                        <p className="text-lg">Address: Piazza della Pizza 8, 00100 Rome, Italy</p>
+                        <p className="text-lg font-semibold">Kapcsolat:</p>
+                        <p className="text-lg">Telefon: +36 1 987 6543</p>
+                        <p className="text-lg">E-mail: contact@bestpizzabuda.com</p>
+                        <p className="text-lg">Cím: Batthyány tér 3, 1011 Budapest, Magyarország</p>
                     </div>
                 </div>
             </div>
