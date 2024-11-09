@@ -27,12 +27,12 @@ const LandingPage = () => {
         <h2 className="text-4xl font-bold mb-4">Ínycsiklandozó pizzáink csak rád várnak!</h2>
         <p className="text-xl mb-6">Válaszd ki a kedvenc pizzádat az étlapunkról!</p>
         <div className="flex gap-4">
-          <button
+          <Link
             onClick={() => navigate('/menu')} 
             className="bg-yellow-500 hover:bg-yellow-600 text-black py-2 px-4 rounded-full"
           >
             Étlap
-          </button>
+          </Link>
           <Link
              to="about-us"
              smooth={true}

@@ -70,42 +70,32 @@ const UserFooter = () => {
                 <div className="flex flex-col items-center">
                     <h3 className="text-xl font-semibold mb-4">Webhelytérkép</h3>
                     <ul className="text-sm space-y-2">
-                    <Link
+                        <Link
                             onClick={()=>navigate("/usermain")}
-                            smooth={true}
-                            duration={500}
                             className="text-white hover:text-yellow-300 transition duration-200 cursor-pointer"
                         >
                             <li className="hover:text-yellow-400">Főoldal</li>
                         </Link>
                         <Link
                              onClick={()=>navigate("/menu")}
-                             smooth={true}
-                             duration={500}
                              className="text-white hover:text-yellow-300 transition duration-200 cursor-pointer"
                         >
                             <li className="hover:text-yellow-400">Étlap</li>
                         </Link>
                         <Link
                              to="landing"
-                             smooth={true}
-                             duration={500}
                              className="text-white hover:text-yellow-300 transition duration-200 cursor-pointer"
                         >
                             <li className="hover:text-yellow-400">GYIK</li>
                         </Link>
                         <Link
                              to="landing"
-                             smooth={true}
-                             duration={500}
                              className="text-white hover:text-yellow-300 transition duration-200 cursor-pointer"
                         >
                             <li className="hover:text-yellow-400">Adatvédelmi irányelvek</li>
                         </Link>
                         <Link
                              to="landing"
-                             smooth={true}
-                             duration={500}
                              className="text-white hover:text-yellow-300 transition duration-200 cursor-pointer"
                         >
                             <li className="hover:text-yellow-400">Szolgáltatási feltételek</li>
