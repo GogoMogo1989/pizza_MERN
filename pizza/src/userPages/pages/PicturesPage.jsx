@@ -7,25 +7,25 @@ import image4 from '../../assets/mood4.jpg';
 import woodenTexture from '../../assets/wooden-texture.jpg'; 
 
 const PicturesPage = () => {
-  // States to control the opacity of each image
+
   const { ref: image1Ref, inView: image1InView } = useInView({
-    triggerOnce: false,  // Keep it false to trigger every time the image comes into view
-    threshold: 0.2,      // Trigger when 20% of the image is in view
+    triggerOnce: false, 
+    threshold: 0.2,     
   });
 
   const { ref: image2Ref, inView: image2InView } = useInView({
-    triggerOnce: false,  // Keep it false to trigger every time the image comes into view
-    threshold: 0.2,      // Trigger when 20% of the image is in view
+    triggerOnce: false,  
+    threshold: 0.3,     
   });
 
   const { ref: image3Ref, inView: image3InView } = useInView({
-    triggerOnce: false,  // Keep it false to trigger every time the image comes into view
-    threshold: 0.2,      // Trigger when 20% of the image is in view
+    triggerOnce: false,  
+    threshold: 0.4,      
   });
 
   const { ref: image4Ref, inView: image4InView } = useInView({
-    triggerOnce: false,  // Keep it false to trigger every time the image comes into view
-    threshold: 0.2,      // Trigger when 20% of the image is in view
+    triggerOnce: false, 
+    threshold: 0.5,     
   });
 
   return (
