@@ -19,7 +19,7 @@ const RestaurantsPage = () => {
     });
 
     return (
-        <div className="w-full h-[120vh] bg-cover bg-center" style={{ backgroundImage: `url(${woodenTexture})` }}>
+        <div className="w-full h-[140vh] bg-cover bg-center" style={{ backgroundImage: `url(${woodenTexture})` }}>
             <div className="w-full h-full p-8">
                 <div className="flex items-center mb-8">
                     <div className="w-1/2 flex justify-center">
