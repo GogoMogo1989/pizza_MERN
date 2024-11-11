@@ -32,7 +32,7 @@ const Basket = () => {
 
     return (
         <div
-            className="w-full h-auto bg-cover bg-center flex flex-col items-center p-8"
+            className="w-full h-auto bg-cover bg-center flex flex-col items-center p-20"
             style={{ backgroundImage: `url(${woodenTexture})` }}
         >
             {cartItems.length === 0 ? (
