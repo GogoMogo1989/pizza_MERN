@@ -17,14 +17,6 @@ const orderingSchema = new mongoose.Schema({
         type: Number,
         required: true
     },
-    tracking_name: {
-        type: String,
-        required: true
-    },
-    country: {
-        type: String,
-        required: true
-    },
     zip_code: {
         type: Number,
         required: true

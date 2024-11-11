@@ -2,7 +2,7 @@ import React, { useContext, useState, useEffect } from "react";
 import { CartContext } from "../components/cartContext";
 import woodenTexture from '../../assets/wooden-texture.jpg';
 
-const Basket = () => {
+const Basket = ({ setShowOrderForm }) => {
     const { cartItems, setCartItems } = useContext(CartContext);  
     const [totalPrice, setTotalPrice] = useState(0);
 
@@ -27,6 +27,7 @@ const Basket = () => {
     };
 
     const handleOrder = () => {
+        setShowOrderForm(true);  
         console.log("Rendelés leadva:", cartItems);
     };
 
@@ -85,7 +86,7 @@ const Basket = () => {
                     </div>
                     <button
                         className="bg-yellow-500 text-white py-2 px-4 rounded hover:bg-yellow-600 transition mt-6"
-                        onClick={handleOrder}
+                        onClick={handleOrder}  
                     >
                         Rendelés leadása
                     </button>

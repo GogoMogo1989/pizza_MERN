@@ -11,9 +11,8 @@ const AdminOrderingEdit = () => {
     const [price, setPrice] = useState("");
     const [email, setEmail] = useState("");
     const [phone_number, setPhoneNumber] = useState("");
-    const [tracking_name, setTrackingName] = useState("");
+    const [city, setCity] = useState("");
     const [zip_code, setZipCode] = useState("");
-    const [country, setCountry] = useState("");
     const [address, setAddress] = useState("");
     const [ordered_data, setOrderData] = useState("");
     const [order_number, setOrderNumber] = useState(0)
@@ -32,9 +31,7 @@ const AdminOrderingEdit = () => {
             setPrice(item.price);
             setEmail(item.email);
             setPhoneNumber(item.phone_number);
-            setTrackingName(item.tracking_name);
             setZipCode(item.zip_code);
-            setCountry(item.country);
             setAddress(item.address);
             setOrderData(item.ordered_data);
             setOrderNumber(item.order_number);
@@ -56,9 +53,8 @@ const AdminOrderingEdit = () => {
             price,
             email,
             phone_number: phone_number,
-            tracking_name: tracking_name,
             zip_code: zip_code,
-            country,
+            city,
             address,
             ordered_data: ordered_data,
             order_number: order_number,
@@ -120,19 +116,6 @@ const AdminOrderingEdit = () => {
                         />
                     </div>
                     <div className="mb-4">
-                        <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="tracking_name">
-                            Csomag követési név
-                        </label>
-                        <input
-                            id="tracking_name"
-                            type="text"
-                            value={tracking_name}
-                            onChange={(e) => setTrackingName(e.target.value)}
-                            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                            required
-                        />
-                    </div>
-                    <div className="mb-4">
                         <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="zip_code">
                             Irányítószám
                         </label>
@@ -146,14 +129,14 @@ const AdminOrderingEdit = () => {
                         />
                     </div>
                     <div className="mb-4">
-                        <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="country">
-                            Ország
+                        <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="address">
+                            Város
                         </label>
                         <input
-                            id="country"
+                            id="address"
                             type="text"
-                            value={country}
-                            onChange={(e) => setCountry(e.target.value)}
+                            value={address}
+                            onChange={(e) => setCity(e.target.value)}
                             className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                             required
                         />

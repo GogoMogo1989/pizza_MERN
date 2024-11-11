@@ -1,5 +1,25 @@
 const API_BASE_URL = 'http://localhost:3000/api/userorder';
 
+// Új rendelés feladása
+export async function createOrder(orderData) {
+
+  try {
+    const response = await fetch(API_BASE_URL, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(orderData),
+  });
+
+  const responseBody = await response.json(); 
+
+  return responseBody;
+
+  } catch (error) {
+    throw new Error(`Hiba a termék adatainak lekérdezése során: ${error.message}`);
+  }
+
+}
+
 // Rendelés lekérdezése ID alapján
 export async function fetchOrderById(id) {
   try {
