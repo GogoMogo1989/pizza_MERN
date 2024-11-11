@@ -83,6 +83,12 @@ const UserFooter = () => {
                             <li className="hover:text-yellow-400">Étlap</li>
                         </Link>
                         <Link
+                            onClick={()=>navigate("/basket")}
+                            className="text-white hover:text-yellow-300 transition duration-200 cursor-pointer"
+                        >
+                            <li className="hover:text-yellow-400">Kosár</li>
+                        </Link>
+                        <Link
                              to="landing"
                              className="text-white hover:text-yellow-300 transition duration-200 cursor-pointer"
                         >
