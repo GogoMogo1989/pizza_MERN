@@ -4,7 +4,7 @@ import { CartContext } from "../components/cartContext";
 import { createOrder } from "../../services/orderServices"; 
 
 const OrderedData = () => {
-    const { cartItems, clearCart } = useContext(CartContext); 
+    const { cartItems, clearCart } = useContext(CartContext);  
     const [message, setMessage] = useState('');
     const [isLoading, setIsLoading] = useState(false);
 
