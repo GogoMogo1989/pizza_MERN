@@ -9,14 +9,12 @@ export const CartProvider = ({ children }) => {
         setCartItems((prevItems) => {
             const existingItem = prevItems.find((cartItem) => cartItem._id === item._id);
             if (existingItem) {
-                // Ha már létezik az item, növeli a mennyiséget
                 return prevItems.map((cartItem) =>
                     cartItem._id === item._id
                         ? { ...cartItem, quantity: cartItem.quantity + item.quantity }
                         : cartItem
                 );
             } else {
-                // Ha nem létezik, hozzáadja az új itemet a kosárhoz
                 return [...prevItems, { ...item, quantity: item.quantity || 1 }];
             }
         });
