@@ -2,11 +2,13 @@ import React, { useState, useContext } from "react";
 import woodenTexture from '../../assets/wooden-texture.jpg';
 import { CartContext } from "../components/cartContext";
 import { createOrder } from "../../services/orderServices"; 
+import { useNavigate } from "react-router-dom";
 
 const OrderedData = () => {
     const { cartItems, clearCart } = useContext(CartContext);  
     const [message, setMessage] = useState('');
     const [isLoading, setIsLoading] = useState(false);
+    const navigate = useNavigate()
 
     const [formData, setFormData] = useState({
         name: '',
@@ -80,6 +82,8 @@ const OrderedData = () => {
             setMessage("Hálózati hiba történt!");
             setIsLoading(false);
         }
+
+        navigate('/orderdone')
     };
 
     return (

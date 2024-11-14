@@ -59,6 +59,17 @@ const UserNavbar = () => {
           </>
         ) 
 
+        : location.pathname === '/orderdone' ? (
+          <>
+            <Link
+              onClick={() => navigate('/usermain')}
+              className="text-white hover:text-yellow-300 transition duration-200 cursor-pointer"
+            >
+              Főoldal
+            </Link>
+          </>
+        ) 
+
         : (
           <>
             <Link to="landing" smooth={true} duration={500} className="text-white hover:text-yellow-300 transition duration-200 cursor-pointer">

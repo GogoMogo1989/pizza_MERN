@@ -13,6 +13,7 @@ import AdminOrderingEdit from "./adminPages/pages/AdminOrderingEdit"
 import Layout from './userPages/layout/Layout';
 import LayoutMenu from './userPages/layout/LayoutMenu';
 import LayoutBasket from './userPages/layout/LayoutBasket';
+import LayoutOrderDone from'./userPages/layout/LayoutOrderDone';
 
 function App() {
   return (  
@@ -32,6 +33,7 @@ function App() {
                 <Route path="/usermain" element={<Layout />} />
                 <Route path="/menu" element={<LayoutMenu />} />
                 <Route path="/basket" element={<LayoutBasket />} />
+                <Route path="/orderdone" element={<LayoutOrderDone />} />
               </Routes>
             </div>
           </Router>
