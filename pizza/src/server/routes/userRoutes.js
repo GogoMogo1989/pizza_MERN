@@ -4,7 +4,7 @@ const router = express.Router();
 const UserModel = require('../models/userUser');
 const sendMail = require('../utils/sendMail')
 
-// Admin regisztráció
+// User regisztráció
 router.post('/registration', async (req, res) => {
   const { username, password, email, phone_number, zip_code, city, address } = req.body;
 
@@ -29,7 +29,7 @@ router.post('/registration', async (req, res) => {
   }
 });
 
-// Admin bejelentkezés
+// User bejelentkezés
 router.post('/login', async (req, res) => {
   const { username, password } = req.body;
 
@@ -44,21 +44,21 @@ router.post('/login', async (req, res) => {
   }
 });
 
-// Adminok adatainak lekérdezése
+// User adatainak lekérdezése
 router.get('/', (req, res) => {
   UserModel.find({})
     .then((data) => res.send(data))
     .catch((err) => res.status(500).send('Hiba az adminok lekérdezésekor!'));
 });
 
-// Admin adatainak törlése ID alapján
+// User adatainak törlése ID alapján
 router.delete('/:id', (req, res) => {
   UserModel.findByIdAndDelete(req.params.id)
     .then(() => res.status(200).json({ message: 'Az adat törlése sikeres volt!' }))
     .catch((err) => res.status(500).send('Hiba az adat törlésekor!'));
 });
 
-// Admin adatainak lekérdezése ID alapján
+// User adatainak lekérdezése ID alapján
 router.get('/:id', async (req, res) => {
   try {
 
@@ -71,6 +71,42 @@ router.get('/:id', async (req, res) => {
     res.status(200).json(user);
   } catch (err) {
     res.status(500).send('Hiba az admin adatainak lekérdezésekor!');
+  }
+});
+
+// Rendelés frissítése ID alapján
+router.put('/:id', async (req, res) => {
+  const id = req.params.id;
+  const { username, password, email, phone_number, zip_code, city, address } = req.body;
+
+  if (!username || !password || !email || !phone_number || !zip_code || !city || !address) return res.status(400).send('Hiányzó adatok!');
+
+  try {
+    const updatedOrderingData = {
+      username,
+      password,
+      email,
+      phone_number,
+      zip_code,
+      city,
+      address,
+    };
+
+    const updatedUser = await UserModel.findByIdAndUpdate(id, updatedOrderingData, { new: true, runValidators: true });
+
+    if (!updatedUser) {
+      return res.status(404).json({ error: 'A rendelés nem található!' });
+    }
+
+    console.log('A felhasználó sikeresen frissítve lett!');
+    
+    res.status(200).json(updatedUser);
+
+  } catch (err) {
+    console.error('Hiba a felhasználó frissítésekor:', err);
+    if (!res.headersSent) {
+      return res.status(500).json({ error: 'Hiba a felhasználó frissítésekor!' });
+    }
   }
 });
 

@@ -80,3 +80,25 @@ export async function loginUser(username, password) {
       throw new Error(`Hiba történt az adat mentése során: ${error.message}`);
     }
   }
+
+  export async function updateUser(id, userData) {
+      try {
+          const response = await fetch(`${API_BASE_URL}/${id}`, {
+              method: 'PUT',
+              headers: {
+                  'Content-Type': 'application/json',
+              },
+              body: JSON.stringify(userData),
+          });
+  
+          if (!response.ok) {
+              const message = await response.text();
+              throw new Error(message);
+          }
+  
+          return await response.json();  
+      } catch (error) {
+          throw new Error(`Hiba a felhasználó frissítésekor: ${error.message}`);
+      }
+  }
+  

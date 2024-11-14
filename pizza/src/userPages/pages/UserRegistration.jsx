@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from "react";
 import woodenTexture from '../../assets/wooden-texture.jpg';
-import {registerUser} from '../../services/userServices';
+import { registerUser, fetchUserById } from '../../services/userServices';
 import { useNavigate } from 'react-router-dom';
-import { fetchAllUsers } from "../../services/userServices";
+import { fetchAllUsers, updateUser, deleteUser } from "../../services/userServices";
 
 const UserRegistration = () => {
     const [formData, setFormData] = useState({
+        username: '',
         password: '',
         confirmPassword: '',
         email: '',
@@ -15,8 +16,46 @@ const UserRegistration = () => {
         address: ''
     });
     const [error, setError] = useState('');
-    const navigate = useNavigate()
-    const [userNames, setUsersNames] = useState([])
+    const navigate = useNavigate();
+    const [userNames, setUsersNames] = useState([]);
+    const [isEditMode, setIsEditMode] = useState(false);
+
+    useEffect(() => {
+        const loadAdmins = async () => {
+            try {
+                const result = await fetchAllUsers();
+                setUsersNames(result.map((users) => users.username));
+            } catch (error) {
+                alert(error);
+            }
+        };
+
+        loadAdmins();
+
+        const userId = sessionStorage.getItem("userId");
+        if (userId) {
+            setIsEditMode(true);
+            const loadUser = async () => {
+                try {
+                    const user = await fetchUserById(userId);
+                    setFormData({
+                        username: user.username,
+                        email: user.email,
+                        phone_number: user.phone_number,
+                        zip_code: user.zip_code,
+                        city: user.city,
+                        address: user.address,
+                        password: '',  
+                        confirmPassword: ''
+                    });
+                } catch (error) {
+                    console.error("Hiba történt a felhasználói adatok betöltésekor", error);
+                }
+            };
+
+            loadUser();
+        }
+    }, []);
 
     const handleChange = (e) => {
         setFormData({
@@ -24,19 +63,6 @@ const UserRegistration = () => {
             [e.target.name]: e.target.value
         });
     };
-
-    useEffect(() => {
-        const loadAdmins = async () => {
-          try {
-            const result = await fetchAllUsers();
-            setUsersNames(result.map((users) => users.username));
-          } catch (error) {
-            alert(error)
-          }
-        };
-    
-        loadAdmins();
-      }, []);
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -48,37 +74,77 @@ const UserRegistration = () => {
         if (matchingUsernames.length > 0) {
             alert("Ez a felhasználónév már foglalt.");
             return;
-          }
+        }
 
-          if (formData.password !== formData.confirmPassword) {
+        if (formData.password !== formData.confirmPassword) {
             alert("A jelszavak nem egyeznek.");
             return;
-          }
+        }
+
+        try {
+            if(isEditMode){
+                const userId = sessionStorage.getItem("userId");
+                const updatedUserData = {
+                    username: formData.username,
+                    email: formData.email,
+                    phone_number: Number(formData.phone_number),
+                    zip_code: Number(formData.zip_code),
+                    city: formData.city,
+                    address: formData.address,
+                    password: formData.password, 
+                };
+                await updateUser(userId, updatedUserData);
+                alert('Sikeres módosítás!');
+                navigate('/user');
+            } else {
+                const userData = {
+                    username: formData.username,
+                    password: formData.password,
+                    email: formData.email,
+                    phone_number: Number(formData.phone_number),
+                    zip_code: Number(formData.zip_code),
+                    city: formData.city,
+                    address: formData.address
+                };
+                await registerUser(userData);
+                alert('Sikeres regisztráció!');
+                navigate('/user');
+            }
+        } catch (error) {
+            alert(`${error}`);
+        }
+    }
+
+    const handleDelete = async () => {
+        const userId = sessionStorage.getItem("userId");
+        
+        if (!userId) {
+            alert("Nincs bejelentkezett felhasználó.");
+            return;
+        }
     
         try {
-          const userData = {
-            username: formData.username,
-            password: formData.password,
-            email: formData.email,
-            phone_number: Number(formData.phone_number),
-            zip_code: Number(formData.zip_code),
-            city: formData.city,
-            address: formData.address
-          };
-          await registerUser(userData)
-          alert('Sikeres regisztráció!')
-          navigate('/user')
+            const confirmDelete = window.confirm("Biztos, hogy törölni szeretnéd a regisztrációdat?");
+            
+            if (confirmDelete) {
+                await deleteUser(userId);  
+                alert("A felhasználó sikeresen törölve lett.");
+                sessionStorage.removeItem("userId");
+                navigate('/');  
+            }
         } catch (error) {
-          alert(`${error}`);
+            alert(`Hiba történt a törlés során: ${error.message}`);
         }
-      };
+    };
+    
+         
 
     return (
         <div
             className="flex items-center justify-center min-h-screen bg-cover p-10 pt-20"
             style={{ backgroundImage: `url(${woodenTexture})` }}
         >
-            <form 
+            <form
                 className="bg-white p-6 rounded-lg shadow-md w-full max-w-md"
                 onSubmit={handleSubmit}
             >
@@ -91,6 +157,7 @@ const UserRegistration = () => {
                     <input
                         type="text"
                         name="username"
+                        value={formData.username}
                         className="w-full border border-gray-300 p-2 rounded focus:outline-none focus:ring focus:ring-yellow-500"
                         required
                         onChange={handleChange}
@@ -102,6 +169,7 @@ const UserRegistration = () => {
                     <input
                         type="password"
                         name="password"
+                        value={formData.password}
                         className="w-full border border-gray-300 p-2 rounded focus:outline-none focus:ring focus:ring-yellow-500"
                         required
                         onChange={handleChange}
@@ -113,6 +181,7 @@ const UserRegistration = () => {
                     <input
                         type="password"
                         name="confirmPassword"
+                        value={formData.confirmPassword}
                         className="w-full border border-gray-300 p-2 rounded focus:outline-none focus:ring focus:ring-yellow-500"
                         required
                         onChange={handleChange}
@@ -124,6 +193,7 @@ const UserRegistration = () => {
                     <input
                         type="email"
                         name="email"
+                        value={formData.email}
                         className="w-full border border-gray-300 p-2 rounded focus:outline-none focus:ring focus:ring-yellow-500"
                         required
                         onChange={handleChange}
@@ -135,6 +205,7 @@ const UserRegistration = () => {
                     <input
                         type="text"
                         name="phone_number"
+                        value={formData.phone_number}
                         className="w-full border border-gray-300 p-2 rounded focus:outline-none focus:ring focus:ring-yellow-500"
                         required
                         onChange={handleChange}
@@ -146,6 +217,7 @@ const UserRegistration = () => {
                     <input
                         type="text"
                         name="zip_code"
+                        value={formData.zip_code}
                         className="w-full border border-gray-300 p-2 rounded focus:outline-none focus:ring focus:ring-yellow-500"
                         required
                         onChange={handleChange}
@@ -157,6 +229,7 @@ const UserRegistration = () => {
                     <input
                         type="text"
                         name="city"
+                        value={formData.city}
                         className="w-full border border-gray-300 p-2 rounded focus:outline-none focus:ring focus:ring-yellow-500"
                         required
                         onChange={handleChange}
@@ -168,18 +241,40 @@ const UserRegistration = () => {
                     <input
                         type="text"
                         name="address"
+                        value={formData.address}
                         className="w-full border border-gray-300 p-2 rounded focus:outline-none focus:ring focus:ring-yellow-500"
                         required
                         onChange={handleChange}
                     />
                 </div>
 
-                <button
-                    type="submit"
-                    className="bg-yellow-500 text-white w-full py-2 rounded hover:bg-yellow-600 transition focus:outline-none"
-                >
-                    Regisztráció
-                </button>
+                {sessionStorage.getItem("userId") ? (
+                   <div className="flex flex-col space-y-4">
+                      
+                        <button
+                            type="submit"
+                            className="bg-yellow-500 text-white w-full py-2 rounded hover:bg-yellow-600 transition focus:outline-none"
+                        >
+                            Szerkesztés
+                        </button>
+                                  
+                        <button
+                            type="button"
+                            className="bg-red-500 text-white w-full py-2 rounded hover:bg-red-600 transition focus:outline-none"
+                            onClick={handleDelete} 
+                        >
+                            Regisztráció törlése
+                        </button>
+                    </div>
+               
+                ) : (
+                    <button
+                        type="submit"
+                        className="bg-yellow-500 text-white w-full py-2 rounded hover:bg-yellow-600 transition focus:outline-none"
+                    >
+                        Regisztráció
+                    </button>
+                )}
             </form>
         </div>
     );
