@@ -109,7 +109,7 @@ const AdminOrderingPage = () => {
       flex: 1,
       renderCell: (params) => {
         const date = new Date(params.value);
-        date.setHours(date.getHours() + 1);
+        date.setHours(date.getHours());
         
         const formattedDate = date.toLocaleString("hu-HU", {
           year: 'numeric',
@@ -224,7 +224,7 @@ const AdminOrderingPage = () => {
         <AdminOrderSidebar onStatusChange={handleStatusChange} />
         <div className="ml-80 pl-20 pt-20">
           {error && <p className="text-red-500">{error}</p>}
-          <div className='flex justify-end w-1100'>
+          <div className='flex justify-start w-1100'>
               <button 
                   onClick={()=>(pageRefreshed())}
                   className="mb-4 py-2 px-4 flex items-center gap-2"

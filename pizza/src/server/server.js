@@ -9,6 +9,7 @@ const productRoutes = require('./routes/productRoutes');
 const adminRoutes = require('./routes/adminRoutes');
 const orderRoutes = require('./routes/orderRoutes'); 
 const categoryRoutes = require('./routes/categoryRoutes')
+const userRoutes = require('./routes/userRoutes')
 
 // Middleware
 app.use(cors());
@@ -24,6 +25,7 @@ app.use('/api/data', productRoutes);
 app.use('/api/admin', adminRoutes); 
 app.use('/api/userorder', orderRoutes);
 app.use('/api/categories', categoryRoutes)
+app.use('/api/user', userRoutes)
 
 // Szerver indítása
 const port = process.env.PORT || 5000;
