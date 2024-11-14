@@ -70,6 +70,20 @@ const UserNavbar = () => {
           </>
         ) 
 
+        : location.pathname === '/user' ||  location.pathname === '/registration' ? (
+          <>
+           <Link
+              onClick={() => navigate('/usermain')}
+              className="text-white hover:text-yellow-300 transition duration-200 cursor-pointer"
+            >
+              Főoldal
+            </Link>
+            <Link onClick={() => navigate('/menu')} className="text-white hover:text-yellow-300 transition duration-200 cursor-pointer">
+              Étlap
+            </Link>
+          </>
+        )
+
         : (
           <>
             <Link to="landing" smooth={true} duration={500} className="text-white hover:text-yellow-300 transition duration-200 cursor-pointer">
@@ -104,7 +118,7 @@ const UserNavbar = () => {
         </Link>
         <button
           className="bg-transparent border-none cursor-pointer text-white hover:text-yellow-300 transition duration-200"
-          onClick={() => console.log('User icon clicked')}
+          onClick={() => navigate('/user')}
         >
           <FaUser size={20} />
         </button>

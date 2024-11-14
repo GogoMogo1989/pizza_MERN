@@ -8,11 +8,11 @@ const sendMail = require('../utils/sendMail')
 router.post('/registration', async (req, res) => {
   const { username, password, email, phone_number, zip_code, city, address } = req.body;
 
-  if (!username || !password || !email || phone_number || zip_code || city || address) return res.status(400).send('Hiányzó adatok!');
+  if (!username || !password || !email || !phone_number || !zip_code || !city || !address) return res.status(400).send('Hiányzó adatok!');
 
   try {
     const hashedPassword = await bcrypt.hash(password, 10);
-    const userData = new AdminModel({ username, password: hashedPassword, email });
+    const userData = new UserModel({ username, password: hashedPassword, email, phone_number, zip_code, city, address });
     await userData.save();
 
     const userregistrationEmail = {

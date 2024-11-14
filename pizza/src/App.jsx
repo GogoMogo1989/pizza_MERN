@@ -15,6 +15,7 @@ import LayoutMenu from './userPages/layout/LayoutMenu';
 import LayoutBasket from './userPages/layout/LayoutBasket';
 import LayoutOrderDone from'./userPages/layout/LayoutOrderDone';
 import LayoutUser from './userPages/layout/LayoutUser';
+import LayoutUserRegistration from './userPages/layout/LayoutUserRegistration'
 
 function App() {
   return (  
@@ -36,6 +37,7 @@ function App() {
                 <Route path="/basket" element={<LayoutBasket />} />
                 <Route path="/orderdone" element={<LayoutOrderDone />} />
                 <Route path="/user" element={<LayoutUser />} />
+                <Route path="/registration" element={<LayoutUserRegistration />} />
               </Routes>
             </div>
           </Router>

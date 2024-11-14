@@ -1,10 +1,11 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import woodenTexture from '../../assets/wooden-texture.jpg';
-import registerUser from '../../services/userServices';
+import {registerUser} from '../../services/userServices';
+import { useNavigate } from 'react-router-dom';
+import { fetchAllUsers } from "../../services/userServices";
 
 const UserRegistration = () => {
     const [formData, setFormData] = useState({
-        username: '',
         password: '',
         confirmPassword: '',
         email: '',
@@ -14,7 +15,8 @@ const UserRegistration = () => {
         address: ''
     });
     const [error, setError] = useState('');
-    const [successMessage, setSuccessMessage] = useState('');
+    const navigate = useNavigate()
+    const [userNames, setUsersNames] = useState([])
 
     const handleChange = (e) => {
         setFormData({
@@ -23,30 +25,53 @@ const UserRegistration = () => {
         });
     };
 
+    useEffect(() => {
+        const loadAdmins = async () => {
+          try {
+            const result = await fetchAllUsers();
+            setUsersNames(result.map((users) => users.username));
+          } catch (error) {
+            alert(error)
+          }
+        };
+    
+        loadAdmins();
+      }, []);
+
     const handleSubmit = async (e) => {
         e.preventDefault();
-        if (formData.password !== formData.confirmPassword) {
-            setError('A jelszavak nem egyeznek!');
-            return;
-        }
 
+        const matchingUsernames = userNames.filter(
+            (userName) => userName === formData.username
+        );
+
+        if (matchingUsernames.length > 0) {
+            alert("Ez a felhasználónév már foglalt.");
+            return;
+          }
+
+          if (formData.password !== formData.confirmPassword) {
+            alert("A jelszavak nem egyeznek.");
+            return;
+          }
+    
         try {
-            setError('');
-            setSuccessMessage('');
-            const response = await registerUser({
-                username: formData.username,
-                password: formData.password,
-                email: formData.email,
-                phone_number: formData.phone_number,
-                zip_code: formData.zip_code,
-                city: formData.city,
-                address: formData.address
-            });
-            setSuccessMessage(response.message);
+          const userData = {
+            username: formData.username,
+            password: formData.password,
+            email: formData.email,
+            phone_number: Number(formData.phone_number),
+            zip_code: Number(formData.zip_code),
+            city: formData.city,
+            address: formData.address
+          };
+          await registerUser(userData)
+          alert('Sikeres regisztráció!')
+          navigate('/user')
         } catch (error) {
-            setError(error.message);
+          alert(`${error}`);
         }
-    };
+      };
 
     return (
         <div

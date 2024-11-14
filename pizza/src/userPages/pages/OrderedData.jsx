@@ -1,14 +1,15 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import woodenTexture from '../../assets/wooden-texture.jpg';
 import { CartContext } from "../components/cartContext";
-import { createOrder } from "../../services/orderServices"; 
+import { createOrder } from "../../services/orderServices";
 import { useNavigate } from "react-router-dom";
+import { fetchUserById } from "../../services/userServices";  
 
 const OrderedData = () => {
     const { cartItems, clearCart } = useContext(CartContext);  
     const [message, setMessage] = useState('');
     const [isLoading, setIsLoading] = useState(false);
-    const navigate = useNavigate()
+    const navigate = useNavigate();
 
     const [formData, setFormData] = useState({
         name: '',
@@ -23,6 +24,33 @@ const OrderedData = () => {
         type_of_delivery: '',
         ordered_data: cartItems
     });
+
+    useEffect(() => {
+
+        const userId = sessionStorage.getItem("userId");
+
+        if (userId) {
+            const fetchUserData = async () => {
+                try {
+                    const userData = await fetchUserById(userId);
+                    setFormData({
+                        ...formData,
+                        name: userData.username || '',
+                        email: userData.email || '',
+                        phone_number: userData.phone_number || '',
+                        country: userData.country || '',
+                        zip_code: userData.zip_code || '',
+                        city: userData.city || '',
+                        address: userData.address || '',
+                    });
+                } catch (error) {
+                    console.error("Hiba a felhasználói adatok lekérdezésekor:", error);
+                }
+            };
+
+            fetchUserData();
+        }
+    }, []); 
 
     const handleChange = (e) => {
         const { name, value } = e.target;
@@ -59,7 +87,7 @@ const OrderedData = () => {
             ...formData,
             phone_number: Number(formData.phone_number),
             zip_code: Number(formData.zip_code),
-            order_number: Math.floor(Math.random() * 1000000), 
+            order_number: null, 
             ordered_data: preparedOrderedData,  
             price: totalPrice, 
             user_id: userId,  
@@ -69,17 +97,16 @@ const OrderedData = () => {
         try {
             const response = await createOrder(preparedData); 
 
-            if (!response.ok) {
+            if (response.ok) {
+                setMessage("Hiba történt a rendelés feladása közben.");
+            } else {
                 clearCart();  
                 setMessage("Megrendelés sikeresen elküldve!");
-                setIsLoading(false);
-            } else {
-                setMessage("Hiba történt a rendelés feladása közben.");
-                setIsLoading(false);
             }
         } catch (error) {
             console.error("Network error:", error);
             setMessage("Hálózati hiba történt!");
+        } finally {
             setIsLoading(false);
         }
 

@@ -1,34 +1,21 @@
-import React, { useState } from "react";
+import React from "react";
 import UserLogin from "../pages/UserLogin";
-import UserRegistration from "../pages/UserRegistration";
 import UserNavbar from "../components/userNavbar";
 import UserFooter from "../components/userFooter";
 
-const LayoutUser = () => {
-    
-    const [isRegistering, setIsRegistering] = useState(false);
-
-    const handleRegistrationLinkClick = () => {
-        setIsRegistering(true);
-    };
+const LayoutLogin = () => {
 
     return (
-        <div className="LayoutUser">
+        <div className="LayoutLogin">
             <UserNavbar />
 
-            {isRegistering ? (
-                <div id="userregistration">
-                    <UserRegistration />
-                </div>
-            ) : (
                 <div id="userlogin">
-                    <UserLogin onRegisterClick={handleRegistrationLinkClick} />
+                    <UserLogin />
                 </div>
-            )}
 
             <UserFooter />
         </div>
     );
 };
 
-export default LayoutUser;
+export default LayoutLogin;
