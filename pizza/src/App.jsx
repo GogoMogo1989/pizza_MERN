@@ -10,12 +10,12 @@ import { AuthProvider } from "./auth/AuthContext"
 import { CartProvider } from './userPages/components/cartContext';
 import AdminOrderingPages from "./adminPages/pages/AdminOrderingPages"
 import AdminOrderingEdit from "./adminPages/pages/AdminOrderingEdit"
-import Layout from './userPages/pages/Layout';
-import LayoutMenu from './userPages/pages/LayoutMenu';
-import LayoutBasket from './userPages/pages/LayoutBasket';
+import Layout from './userPages/layout/Layout';
+import LayoutMenu from './userPages/layout/LayoutMenu';
+import LayoutBasket from './userPages/layout/LayoutBasket';
 
 function App() {
-  return (
+  return (  
     <div className="App">
       <AuthProvider>
         <CartProvider>
