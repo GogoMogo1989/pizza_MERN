@@ -34,11 +34,11 @@ const orderingSchema = new mongoose.Schema({
         quantity: Number,
         price: Number,
     }],
-    order_number:{
+    order_number: {
         type: Number,
         required: true
     },
-    is_active:{
+    is_active: {
         type: Boolean,
         required: true
     },
@@ -54,6 +54,10 @@ const orderingSchema = new mongoose.Schema({
         type: String,
         required: true
     },
+    order_date: {
+        type: Date,
+        default: Date.now 
+    }
 });
 
 const OrderingModel = mongoose.model('ordering', orderingSchema);

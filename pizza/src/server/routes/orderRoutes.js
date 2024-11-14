@@ -38,7 +38,6 @@ router.post('/', async (req, res) => {
     await orderingData.save();
     console.log('A rendelés mentése sikeres volt!');
     
-    // Küldd el a választ először
     res.status(201).json({ message: 'Rendelés sikeresen feladva', orderNumber });
 
     const sendToOrder = {

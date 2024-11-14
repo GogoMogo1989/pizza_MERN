@@ -5,7 +5,7 @@ function AdminOrderSidebar({ onStatusChange }) {
     ];
 
     return (
-        <div className="w-80 bg-gray-800 text-white h-[calc(100vh-4rem)] p-4 fixed top-16 left-0 overflow-y-auto">
+        <div className="w-80 bg-gray-800 text-white h-[calc(100vh-4rem)] p-4 fixed top-16 left-0 overflow-y-auto" style={{zIndex:1}}>
             {mainCategories.map((category) => (
                 <div className="mb-2" key={category.value}> 
                     <button 

@@ -51,6 +51,7 @@ const AdminOrderingPage = () => {
     setPopupMessage(
       isActive ? 'Biztos, hogy újra aktiválod a rendelést?' : 'Biztos lezárod a rendelést?'
     );
+    setPopupWindowCancelButtonPreview(true)
     setPopupConfirmCallback(() => () => handleActive(id, isActive));
   };
 
@@ -69,7 +70,13 @@ const AdminOrderingPage = () => {
     }
   };
 
-  const confirmDeleteChange = async (id) => {
+  const confirmDeleteChange = (id) => {
+    setPopupMessage('Biztos, hogy törlöd a rendelést?')
+    setPopupConfirmCallback(() => () => handleDelete(id));
+    setPopupWindowCancelButtonPreview(true)
+  };
+
+  const handleDelete = async (id) => {
     try {
       await deleteOrder(id);
       setData((prevData) => prevData.filter((item) => item._id !== id));
@@ -95,40 +102,68 @@ const AdminOrderingPage = () => {
   }
 
   const columns = [
-    { field: "order_number", headerName: "Azonosító", width: 100 },
-    { field: "name", headerName: "Név", width: 100 },
-    { field: "email", headerName: "Email", width: 100 },
-    { field: "phone_number", headerName: "Telefonszám", width: 100 },
-    { field: "country", headerName: "Ország", width: 100 },
-    { field: "zip_code", headerName: "Irányítószám", width: 60 },
-    { field: "city", headerName: "Város", width: 100 },
-    { field: "address", headerName: "Cím", width: 100 },
-    { field: "type_of_delivery", headerName: "Szállítási mód", width: 100 },
-    { field: "type_of_paid", headerName: "Fizetési mód", width: 80 },
+    { field: "order_number", headerName: "Azonosító", flex: 1 },
+    {
+      field: "order_date",
+      headerName: "Dátum",
+      flex: 1,
+      renderCell: (params) => {
+        const date = new Date(params.value);
+        date.setHours(date.getHours() + 1);
+        
+        const formattedDate = date.toLocaleString("hu-HU", {
+          year: 'numeric',
+          month: 'numeric',
+          day: 'numeric',
+          hour: '2-digit',
+          minute: '2-digit',
+        });
+    
+        return (
+          <div className="overflow-x-auto max-w-xs">
+            <table className="min-w-full">
+              <tbody>
+                <tr>
+                  <td className="p-2">{formattedDate}</td> 
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        );
+      }
+    },
+    { field: "name", headerName: "Név", flex: 1 },
+    { field: "email", headerName: "Email", flex: 1 },
+    { field: "phone_number", headerName: "Telefonszám", flex: 1 },
+    { field: "zip_code", headerName: "Irányítószám", flex: 0.5 },
+    { field: "city", headerName: "Város", flex: 1 },
+    { field: "address", headerName: "Cím", flex: 1 },
+    { field: "type_of_delivery", headerName: "Szállítási mód", flex: 1 },
+    { field: "type_of_paid", headerName: "Fizetési mód", flex: 0.8 },
     {
       field: "ordered_data",
       headerName: "Termékek",
-      width: 400,
+      flex: 2,
       renderCell: (params) => (
         <div className="overflow-x-auto max-w-xs">
-        <table className="min-w-full border-collapse">
-          <tbody>
-            {params.value.map((item, index) => (
-              <tr key={index}>
-                <td className="border p-2">{item.product_name}</td>
-                <td className="border p-2">{item.quantity}db</td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      </div>
+          <table className="min-w-full border-collapse">
+            <tbody>
+              {params.value.map((item, index) => (
+                <tr key={index}>
+                  <td className="border p-2">{item.product_name}</td>
+                  <td className="border p-2">{item.quantity}db</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
       ),
     },
-    { field: "price", headerName: "Ár(Ft)", type: "number", width: 80 },
+    { field: "price", headerName: "Ár(Ft)", type: "number", flex: 0.8 },
     {
       field: "Action",
       headerName: "",
-      width: 120,
+      flex: 1.2,
       renderCell: (params) => (
         <div className="flex justify-center items-center gap-2 h-full">
           <button className="py-1 px-2" onClick={() => confirmDeleteChange(params.id)}>
@@ -154,17 +189,16 @@ const AdminOrderingPage = () => {
     {
       field: "Download_Invoice",
       headerName: "Számla letöltése",
-      width: 150,
+      flex: 1.5,
       renderCell: (params) => (
-          <div className="flex justify-center items-center gap-2 h-full">
-            <button onClick={() => handleDownloadInvoice(params.id, data)}>
-              <FaFileDownload size={20} />
-            </button>
-          </div>
+        <div className="flex justify-center items-center gap-2 h-full">
+          <button onClick={() => handleDownloadInvoice(params.id, data)}>
+            <FaFileDownload size={20} />
+          </button>
+        </div>
       ),
     },
-  ];
-  
+  ];  
   
   const rows = filteredData.map((item) => ({
     id: item._id,
@@ -179,7 +213,8 @@ const AdminOrderingPage = () => {
     ordered_data: item.ordered_data,
     order_number: item.order_number,
     type_of_paid: item.type_of_paid,
-    type_of_delivery: item.type_of_delivery
+    type_of_delivery: item.type_of_delivery,
+    order_date: item.order_date
   }));
 
   return (
@@ -197,7 +232,7 @@ const AdminOrderingPage = () => {
                   <IoMdRefresh size={30} className="text-blue-500"/>
               </button>
           </div>
-          <div className="h-550 w-1100 fixed">
+          <div className="h-screen overflow-auto w-screen">
             <DataGrid
               rows={rows}
               columns={columns}
