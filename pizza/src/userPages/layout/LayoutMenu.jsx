@@ -1,10 +1,10 @@
 import React from 'react';
 import UserNavbar from '../components/userNavbar';
 import UserFooter from '../components/userFooter';
-import PizzaMenu from './PizzaMenu';
-import SaladMenu from './SaladMenu';
-import DessertMenu from './DessertMenu';
-import DrinkMenu from './DrinkMenu'
+import PizzaMenu from '../pages/PizzaMenu';
+import SaladMenu from '../pages/SaladMenu';
+import DessertMenu from '../pages/DessertMenu';
+import DrinkMenu from '../pages/DrinkMenu'
 
 const LayoutMenu = () => {
     return (

@@ -1,9 +1,9 @@
 import React from 'react';
 import UserNavbar from "../components/userNavbar";
-import LandingPage from "./LandingPage";
-import AboutUsPage from "./AboutUsPage";
-import RestaurantsPage from "./RestaurantsPage";
-import PicturesPage from "./PicturesPage";
+import LandingPage from "../pages/LandingPage";
+import AboutUsPage from "../pages/AboutUsPage";
+import RestaurantsPage from "../pages/RestaurantsPage";
+import PicturesPage from "../pages/PicturesPage";
 import UserFooter from "../components/userFooter";
 
 const Layout = () => {

@@ -1,8 +1,8 @@
 import React from "react";
-import Basket from "./Basket";
+import Basket from "../pages/Basket";
 import UserFooter from "../components/userFooter";
 import UserNavbar from "../components/userNavbar";
-import OrderedData from "./OrderedData";
+import OrderedData from "../pages/OrderedData";
 
 const LayoutBasket = () => {
     
