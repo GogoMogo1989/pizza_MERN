@@ -1,6 +1,7 @@
-import React, { useContext, useState, useEffect } from "react";
+import React, { useContext, useState, useEffect, useRef} from "react";
 import { CartContext } from "../components/cartContext";
 import woodenTexture from '../../assets/wooden-texture.jpg';
+import { Link } from "react-scroll";
 
 const Basket = ({ setShowOrderForm }) => {
     const { cartItems, setCartItems } = useContext(CartContext);  
@@ -28,7 +29,6 @@ const Basket = ({ setShowOrderForm }) => {
 
     const handleOrder = () => {
         setShowOrderForm(true);  
-        console.log("Rendelés leadva:", cartItems);
     };
 
     return (
@@ -87,8 +87,10 @@ const Basket = ({ setShowOrderForm }) => {
                     <button
                         className="bg-yellow-500 text-white py-2 px-4 rounded hover:bg-yellow-600 transition mt-6"
                         onClick={handleOrder}  
-                    >
-                        Rendelés leadása
+                        >
+                        <Link to='ordered' smooth>
+                            Rendelés leadása
+                        </Link>
                     </button>
                 </div>
             )}
