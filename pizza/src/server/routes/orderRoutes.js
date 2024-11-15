@@ -214,7 +214,7 @@ router.get('/done/:id', async (req, res) => {
         `- Rendelési adatok: ${data.ordered_data.map(item => `\n    - Termék neve: ${item.product_name}, Mennyiség: ${item.quantity}`).join('')}\n` +
         `- Fizetési mód: ${data.type_of_paid}\n` +
         `- Szállítási mód: ${data.type_of_delivery}\n\n` +
-        `Üdvözlettel,\nBest csapata`
+        `Üdvözlettel,\nBest Pizza csapata`
     };
 
     sendMail(orderDoneEmail);
