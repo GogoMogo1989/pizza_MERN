@@ -141,11 +141,11 @@ const UserRegistration = () => {
 
     return (
         <div
-            className="flex items-center justify-center min-h-screen bg-cover p-10 pt-20"
+            className="flex items-center justify-center min-h-screen bg-cover p-10 pt-20 "
             style={{ backgroundImage: `url(${woodenTexture})` }}
         >
             <form
-                className="bg-white p-6 rounded-lg shadow-md w-full max-w-md"
+                className="bg-white p-6 rounded-lg shadow-md w-full max-w-md bg-opacity-90"
                 onSubmit={handleSubmit}
             >
                 <h2 className="text-2xl font-bold mb-4 text-center">Regisztráció</h2>

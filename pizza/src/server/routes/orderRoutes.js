@@ -138,7 +138,7 @@ router.put('/:id', async (req, res) => {
           `- Rendelési adatok: ${ordered_data.map(item => `\n    - Termék neve: ${item.product_name}, Mennyiség: ${item.quantity}`).join('')}\n` +
           `- Fizetési mód: ${type_of_paid}\n` +
           `- Szállítási mód: ${type_of_delivery}\n\n` +
-          `Üdvözlettel,\nSilverland csapata`
+          `Üdvözlettel,\nBest Pizza csapata`
       };
       
       sendMail(orderEditEmail);
@@ -204,7 +204,7 @@ router.get('/done/:id', async (req, res) => {
       from: 'silverland2024@gmail.com',
       to: data.email,
       subject: 'Rendelésed elkészült!',
-      text: `Kedves ${data.name},\n\nRendelésedet sikeresen elkészült! A rendelési számod: ${data.order_number}.\n\nItt találhatóak a rendelési adatok:\n\n` +
+      text: `Kedves ${data.name},\n\nRendelésed sikeresen elkészült! A rendelési számod: ${data.order_number}.\n\nItt találhatóak a rendelési adatok:\n\n` +
         `- Név: ${data.name}\n` +
         `- Ár: ${data.price}\n` +
         `- Telefon szám: ${data.phone_number}\n` +
@@ -214,7 +214,7 @@ router.get('/done/:id', async (req, res) => {
         `- Rendelési adatok: ${data.ordered_data.map(item => `\n    - Termék neve: ${item.product_name}, Mennyiség: ${item.quantity}`).join('')}\n` +
         `- Fizetési mód: ${data.type_of_paid}\n` +
         `- Szállítási mód: ${data.type_of_delivery}\n\n` +
-        `Üdvözlettel,\nSilverland csapata`
+        `Üdvözlettel,\nBest csapata`
     };
 
     sendMail(orderDoneEmail);
