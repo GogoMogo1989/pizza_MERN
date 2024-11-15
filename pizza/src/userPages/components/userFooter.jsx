@@ -9,14 +9,12 @@ const UserFooter = () => {
     return (
         <div className="bg-black text-white p-8">
 
-            {/* Copyright */}
             <div className="text-center mb-6">
                 <p className="text-sm">&copy; 2024 Best Pizza Co. Minden jog fenntartva.</p>
             </div>
 
-            {/* Flex layout for larger screens */}
             <div className="flex flex-col md:flex-row justify-around mb-8">
-                {/* Best Pizza Budapest */}
+            
                 <div className="flex flex-col items-center mb-8 md:mb-0">
                     <h3 className="text-xl font-semibold mb-2">Best Pizza Budapest</h3>
                     <p className="text-sm">Telefon: +123 456 7890</p>
@@ -27,7 +25,7 @@ const UserFooter = () => {
                     </p>
                     <p className="text-sm">Cím: Andrássy Út 45, 1061 Budapest, Magyarország</p>
                 </div>
-                {/* Best Pizza Budapest 2 */}
+    
                 <div className="flex flex-col items-center mb-8 md:mb-0">
                     <h3 className="text-xl font-semibold mb-2">Best Pizza Budapest 2</h3>
                     <p className="text-sm">Telefon: +987 654 3210</p>
@@ -40,9 +38,7 @@ const UserFooter = () => {
                 </div>
             </div>
 
-            {/* Quick Links and Sitemap */}
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8">
-                {/* Gyors linkek */}
                 <div className="flex flex-col items-center mb-8 md:mb-0">
                     <h3 className="text-xl font-semibold mb-4">Gyors linkek</h3>
                     <ul className="text-sm space-y-2">
@@ -73,7 +69,6 @@ const UserFooter = () => {
                     </ul>
                 </div>
 
-                {/* Webhelytérkép */}
                 <div className="flex flex-col items-center text-center">
                     <h3 className="text-xl font-semibold mb-4">Webhelytérkép</h3>
                     <ul className="text-sm space-y-2">
@@ -117,7 +112,6 @@ const UserFooter = () => {
                 </div>
             </div>
 
-            {/* Social Media Links */}
             <div className="text-center mt-8 mb-4">
                 <p className="text-sm mb-2">Kövess minket:</p>
                 <div className="flex justify-center gap-6">
@@ -127,7 +121,6 @@ const UserFooter = () => {
                 </div>
             </div>
 
-            {/* Legal and Privacy Links */}
             <div className="text-center mt-4">
                 <ul className="text-sm space-y-2">
                     <Link
