@@ -30,7 +30,7 @@ const PicturesPage = () => {
 
   return (
     <div 
-      className="w-full h-[180vh] bg-cover bg-center relative" 
+      className="hidden md:block w-full h-[180vh] bg-cover bg-center relative" 
       style={{ backgroundImage: `url(${woodenTexture})` }} 
     >
       <div className="absolute top-0 left-0 w-full h-full">

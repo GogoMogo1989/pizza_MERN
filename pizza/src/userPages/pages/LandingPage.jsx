@@ -43,7 +43,7 @@ const LandingPage = () => {
         </div>
       </div>
       
-      <div className="w-1/2 h-full">
+      <div className="hidden md:block w-1/2 h-full">
         <Slider {...settings}>
           <div>
             <img src={backgroundImage1} alt="Pizza 1" className="w-4/5 h-full object-cover" />

@@ -8,13 +8,16 @@ const UserFooter = () => {
 
     return (
         <div className="bg-black text-white p-8">
-         
+
+            {/* Copyright */}
             <div className="text-center mb-6">
                 <p className="text-sm">&copy; 2024 Best Pizza Co. Minden jog fenntartva.</p>
             </div>
 
-            <div className="flex justify-around mb-8">
-                <div className="flex flex-col items-center">
+            {/* Flex layout for larger screens */}
+            <div className="flex flex-col md:flex-row justify-around mb-8">
+                {/* Best Pizza Budapest */}
+                <div className="flex flex-col items-center mb-8 md:mb-0">
                     <h3 className="text-xl font-semibold mb-2">Best Pizza Budapest</h3>
                     <p className="text-sm">Telefon: +123 456 7890</p>
                     <p className="text-sm">
@@ -24,7 +27,8 @@ const UserFooter = () => {
                     </p>
                     <p className="text-sm">Cím: Andrássy Út 45, 1061 Budapest, Magyarország</p>
                 </div>
-                <div className="flex flex-col items-center">
+                {/* Best Pizza Budapest 2 */}
+                <div className="flex flex-col items-center mb-8 md:mb-0">
                     <h3 className="text-xl font-semibold mb-2">Best Pizza Budapest 2</h3>
                     <p className="text-sm">Telefon: +987 654 3210</p>
                     <p className="text-sm">
@@ -36,12 +40,14 @@ const UserFooter = () => {
                 </div>
             </div>
 
-            <div className="flex justify-around mb-8">
-                <div className="flex flex-col items-center">
+            {/* Quick Links and Sitemap */}
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8">
+                {/* Gyors linkek */}
+                <div className="flex flex-col items-center mb-8 md:mb-0">
                     <h3 className="text-xl font-semibold mb-4">Gyors linkek</h3>
                     <ul className="text-sm space-y-2">
                         <Link
-                            onClick={()=>navigate("/usermain")}
+                            onClick={() => navigate("/usermain")}
                             smooth={true}
                             duration={500}
                             className="text-white hover:text-yellow-300 transition duration-200 cursor-pointer"
@@ -49,60 +55,61 @@ const UserFooter = () => {
                             <li className="hover:text-yellow-400">Főoldal</li>
                         </Link>
                         <Link
-                             onClick={()=>navigate("/menu")}
-                             smooth={true}
-                             duration={500}
-                             className="text-white hover:text-yellow-300 transition duration-200 cursor-pointer"
+                            onClick={() => navigate("/menu")}
+                            smooth={true}
+                            duration={500}
+                            className="text-white hover:text-yellow-300 transition duration-200 cursor-pointer"
                         >
                             <li className="hover:text-yellow-400">Étlap</li>
                         </Link>
                         <Link
-                             to="landing"
-                             smooth={true}
-                             duration={500}
-                             className="text-white hover:text-yellow-300 transition duration-200 cursor-pointer"
+                            to="landing"
+                            smooth={true}
+                            duration={500}
+                            className="text-white hover:text-yellow-300 transition duration-200 cursor-pointer"
                         >
                             <li className="hover:text-yellow-400">Elérhetőségeink</li>
                         </Link>
                     </ul>
                 </div>
 
-                <div className="flex flex-col items-center">
+                {/* Webhelytérkép */}
+                <div className="flex flex-col items-center text-center">
                     <h3 className="text-xl font-semibold mb-4">Webhelytérkép</h3>
                     <ul className="text-sm space-y-2">
                         <Link
-                            onClick={()=>navigate("/usermain")}
+                            onClick={() => navigate("/usermain")}
                             className="text-white hover:text-yellow-300 transition duration-200 cursor-pointer"
                         >
                             <li className="hover:text-yellow-400">Főoldal</li>
                         </Link>
                         <Link
-                             onClick={()=>navigate("/menu")}
-                             className="text-white hover:text-yellow-300 transition duration-200 cursor-pointer"
+                            onClick={() => navigate("/menu")}
+                            className="text-white hover:text-yellow-300 transition duration-200 cursor-pointer"
                         >
                             <li className="hover:text-yellow-400">Étlap</li>
                         </Link>
                         <Link
-                            onClick={()=>navigate("/basket")}
+                            onClick={() => navigate("/basket")}
                             className="text-white hover:text-yellow-300 transition duration-200 cursor-pointer"
                         >
                             <li className="hover:text-yellow-400">Kosár</li>
                         </Link>
                         <Link
-                             to="landing"
-                             className="text-white hover:text-yellow-300 transition duration-200 cursor-pointer"
+                            to="landing"
+                            className="text-white hover:text-yellow-300 transition duration-200 cursor-pointer"
                         >
                             <li className="hover:text-yellow-400">GYIK</li>
                         </Link>
                         <Link
-                             to="landing"
-                             className="text-white hover:text-yellow-300 transition duration-200 cursor-pointer"
+                            to="landing"
+                            className="text-white hover:text-yellow-300 transition duration-200 cursor-pointer"
                         >
                             <li className="hover:text-yellow-400">Adatvédelmi irányelvek</li>
                         </Link>
                         <Link
-                             to="landing"
-                             className="text-white hover:text-yellow-300 transition duration-200 cursor-pointer"
+                            to="landing"
+                            className="text-white hover:text-yellow-300 transition duration-200 cursor-pointer"
                         >
                             <li className="hover:text-yellow-400">Szolgáltatási feltételek</li>
                         </Link>
@@ -110,6 +117,7 @@ const UserFooter = () => {
                 </div>
             </div>
 
+            {/* Social Media Links */}
             <div className="text-center mt-8 mb-4">
                 <p className="text-sm mb-2">Kövess minket:</p>
                 <div className="flex justify-center gap-6">
@@ -119,21 +127,22 @@ const UserFooter = () => {
                 </div>
             </div>
 
+            {/* Legal and Privacy Links */}
             <div className="text-center mt-4">
                 <ul className="text-sm space-y-2">
                     <Link
-                            to="landing"
-                            smooth={true}
-                            duration={500}
-                            className="text-white hover:text-yellow-300 transition duration-200 cursor-pointer"
+                        to="landing"
+                        smooth={true}
+                        duration={500}
+                        className="text-white hover:text-yellow-300 transition duration-200 cursor-pointer"
                     >
                         <li className="hover:text-yellow-400">Adatvédelmi irányelvek</li>
                     </Link>
                     <Link
-                            to="landing"
-                            smooth={true}
-                            duration={500}
-                            className="text-white hover:text-yellow-300 transition duration-200 cursor-pointer"
+                        to="landing"
+                        smooth={true}
+                        duration={500}
+                        className="text-white hover:text-yellow-300 transition duration-200 cursor-pointer"
                     >
                         <li className="hover:text-yellow-400">Szolgáltatási feltételek</li>
                     </Link>
