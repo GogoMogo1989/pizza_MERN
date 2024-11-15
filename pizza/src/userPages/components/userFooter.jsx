@@ -39,7 +39,7 @@ const UserFooter = () => {
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8">
-                <div className="flex flex-col items-center mb-8 md:mb-0">
+                <div className="flex flex-col items-center text-center mb-8 md:mb-0">
                     <h3 className="text-xl font-semibold mb-4">Gyors linkek</h3>
                     <ul className="text-sm space-y-2">
                         <Link
