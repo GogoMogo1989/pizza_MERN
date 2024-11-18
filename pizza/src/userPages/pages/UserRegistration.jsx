@@ -3,6 +3,7 @@ import woodenTexture from '../../assets/wooden-texture.jpg';
 import { registerUser, fetchUserById } from '../../services/userServices';
 import { useNavigate } from 'react-router-dom';
 import { fetchAllUsers, updateUser, deleteUser } from "../../services/userServices";
+import AdminPopupWindows from "../../adminPages/pages/AdminPopupWindows";
 
 const UserRegistration = () => {
     const [formData, setFormData] = useState({
@@ -19,6 +20,11 @@ const UserRegistration = () => {
     const navigate = useNavigate();
     const [userNames, setUsersNames] = useState([]);
     const [isEditMode, setIsEditMode] = useState(false);
+    const [popupMessage, setPopupMessage] = useState("");
+    const [popupNavigate, setPopupNavigate] = useState("");
+    const [popupConfirmCallback, setPopupConfirmCallback] = useState(
+      () => () => (setPopupMessage(""), setPopupNavigate("")))
+    const [popupWindowCancelButtonPreview, setPopupWindowCancelButtonPreview] = useState(false);
 
     useEffect(() => {
         const loadAdmins = async () => {
@@ -72,12 +78,12 @@ const UserRegistration = () => {
         );
 
         if (matchingUsernames.length > 0) {
-            alert("Ez a felhasználónév már foglalt.");
+            setPopupMessage("Ez a felhasználónév már foglalt.");
             return;
         }
 
         if (formData.password !== formData.confirmPassword) {
-            alert("A jelszavak nem egyeznek.");
+            setPopupMessage("A jelszavak nem egyeznek.");
             return;
         }
 
@@ -94,7 +100,7 @@ const UserRegistration = () => {
                     password: formData.password, 
                 };
                 await updateUser(userId, updatedUserData);
-                alert('Sikeres módosítás!');
+                setPopupMessage('Sikeres módosítás');
                 navigate('/user');
             } else {
                 const userData = {
@@ -107,7 +113,7 @@ const UserRegistration = () => {
                     address: formData.address
                 };
                 await registerUser(userData);
-                alert('Sikeres regisztráció!');
+                setPopupMessage('Sikeres regisztráció');
                 navigate('/user');
             }
         } catch (error) {
@@ -115,29 +121,27 @@ const UserRegistration = () => {
         }
     }
 
+    const handleDeleteConfirm = async () => {
+
+        setPopupMessage('Biztos, hogy törlöd a regisztrációt?');
+        setPopupNavigate('/user');
+        setPopupConfirmCallback(() => () => handleDelete());
+        setPopupWindowCancelButtonPreview(true);
+    }
+
     const handleDelete = async () => {
+
         const userId = sessionStorage.getItem("userId");
-        
-        if (!userId) {
-            alert("Nincs bejelentkezett felhasználó.");
-            return;
-        }
     
         try {
-            const confirmDelete = window.confirm("Biztos, hogy törölni szeretnéd a regisztrációdat?");
-            
-            if (confirmDelete) {
-                await deleteUser(userId);  
-                alert("A felhasználó sikeresen törölve lett.");
-                sessionStorage.removeItem("userId");
-                navigate('/');  
-            }
+            const result = await deleteUser(userId);  
+            setPopupMessage(result);
+            sessionStorage.removeItem("userId");
+            navigate('/');  
         } catch (error) {
-            alert(`Hiba történt a törlés során: ${error.message}`);
+            setPopupMessage(`Hiba történt a törlés során: ${error.message}`);
         }
-    };
-    
-         
+    };   
 
     return (
         <div
@@ -261,7 +265,7 @@ const UserRegistration = () => {
                         <button
                             type="button"
                             className="bg-red-500 text-white w-full py-2 rounded hover:bg-red-600 transition focus:outline-none"
-                            onClick={handleDelete} 
+                            onClick={handleDeleteConfirm} 
                         >
                             Regisztráció törlése
                         </button>
@@ -276,6 +280,22 @@ const UserRegistration = () => {
                     </button>
                 )}
             </form>
+            {popupMessage && (
+                <AdminPopupWindows
+                    isUserPage={true}
+                    message={popupMessage}
+                    popupNavigate={popupNavigate}
+                    onConfirm={popupConfirmCallback}
+                    onCancel={() => {
+                        setPopupMessage("");
+                        setPopupNavigate("");
+                        setPopupConfirmCallback(
+                        () => () => (setPopupMessage(""), setPopupNavigate(""))
+                        );
+                    }}
+                    popupWindowCancelButtonPreview={popupWindowCancelButtonPreview}
+                />
+            )}
         </div>
     );
 };

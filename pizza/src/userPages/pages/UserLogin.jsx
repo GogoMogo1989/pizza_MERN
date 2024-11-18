@@ -2,12 +2,20 @@ import React, { useState, useEffect } from "react";
 import woodenTexture from '../../assets/wooden-texture.jpg';
 import { useNavigate } from "react-router-dom";
 import { loginUser, fetchUserById } from '../../services/userServices';
+import AdminPopupWindows from "../../adminPages/pages/AdminPopupWindows";
 
 const UserLogin = () => {
   const navigate = useNavigate();
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [user, setUser] = useState(null); 
+  const [popupMessage, setPopupMessage] = useState("");
+  const [popupNavigate, setPopupNavigate] = useState("");
+  const [popupConfirmCallback, setPopupConfirmCallback] = useState(
+    () => () => (setPopupMessage(""), setPopupNavigate(""))
+  );
+  const [popupWindowCancelButtonPreview, setPopupWindowCancelButtonPreview] =
+    useState(false);
 
   useEffect(() => {
     const userId = sessionStorage.getItem("userId");
@@ -18,6 +26,7 @@ const UserLogin = () => {
           setUser(data);
         } catch (error) {
           console.error("Hiba a felhasználó adatainak lekérdezésekor", error);
+          setPopupMessage("Hiba a felhasználó adatainak lekérdezésekor", error);
         }
       };
 
@@ -29,17 +38,18 @@ const UserLogin = () => {
     e.preventDefault();
 
     if (!username || !password) {
-      alert("Kérlek add meg a felhasználó nevet és a jelszót!");
+      setPopupMessage("Kérlek add meg a felhasználó nevet és a jelszót!");
       return;
     }
 
     try {
       const data = await loginUser(username, password);
       sessionStorage.setItem("userId", data._id); 
-      alert("Sikeres bejelentkezés!");
+      setPopupMessage("Sikeres bejelentkezés!");
+      setPopupNavigate("/user");
       setUser(data); 
     } catch (error) {
-      alert(error.message);
+      setPopupMessage("Hiba a bejelentkezés során!", error);
     }
   };
 
@@ -122,6 +132,22 @@ const UserLogin = () => {
           </div>
         )}
       </div>
+      {popupMessage && (
+        <AdminPopupWindows
+          isUserPage={true}
+          message={popupMessage}
+          popupNavigate={popupNavigate}
+          onConfirm={popupConfirmCallback}
+          onCancel={() => {
+            setPopupMessage("");
+            setPopupNavigate("");
+            setPopupConfirmCallback(
+              () => () => (setPopupMessage(""), setPopupNavigate(""))
+            );
+          }}
+          popupWindowCancelButtonPreview={popupWindowCancelButtonPreview}
+        />
+      )}
     </div>
   );
 };

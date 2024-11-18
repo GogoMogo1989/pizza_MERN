@@ -4,12 +4,19 @@ import { CartContext } from "../components/cartContext";
 import { createOrder } from "../../services/orderServices";
 import { useNavigate } from "react-router-dom";
 import { fetchUserById } from "../../services/userServices";  
+import AdminPopupWindows from "../../adminPages/pages/AdminPopupWindows";
 
 const OrderedData = () => {
     const { cartItems, clearCart } = useContext(CartContext);  
-    const [message, setMessage] = useState('');
     const [isLoading, setIsLoading] = useState(false);
     const navigate = useNavigate();
+    const [popupMessage, setPopupMessage] = useState("");
+    const [popupNavigate, setPopupNavigate] = useState("");
+    const [popupConfirmCallback, setPopupConfirmCallback] = useState(
+      () => () => (setPopupMessage(""), setPopupNavigate(""))
+    );
+    const [popupWindowCancelButtonPreview, setPopupWindowCancelButtonPreview] =
+      useState(false);
 
     const [formData, setFormData] = useState({
         name: '',
@@ -45,6 +52,7 @@ const OrderedData = () => {
                     });
                 } catch (error) {
                     console.error("Hiba a felhasználói adatok lekérdezésekor:", error);
+                    setPopupMessage("Hiba a felhasználói adatok lekérdezésekor:", error);
                 }
             };
 
@@ -70,8 +78,14 @@ const OrderedData = () => {
         return Math.random().toString(36).substr(2, 9); 
     };
 
+    const handleOrderConfirm = async (e) => {
+        e.preventDefault(); 
+        setPopupMessage('Biztos, hogy megrendeled?');
+        setPopupConfirmCallback(() => () => handleSubmit());
+        setPopupWindowCancelButtonPreview(true);
+    }
+
     const handleSubmit = async (e) => {
-        e.preventDefault();  
         setIsLoading(true); 
 
         const preparedOrderedData = cartItems.map(item => ({
@@ -98,14 +112,13 @@ const OrderedData = () => {
             const response = await createOrder(preparedData); 
 
             if (response.ok) {
-                setMessage("Hiba történt a rendelés feladása közben.");
+                setPopupMessage("Hiba történt a rendelés feladása közben.");
             } else {
                 clearCart();  
-                setMessage("Megrendelés sikeresen elküldve!");
             }
         } catch (error) {
             console.error("Network error:", error);
-            setMessage("Hálózati hiba történt!");
+            setPopupMessage("Hálózati hiba történt!", error);
         } finally {
             setIsLoading(false);
         }
@@ -119,7 +132,7 @@ const OrderedData = () => {
             style={{ backgroundImage: `url(${woodenTexture})` }}
         >
             <h2 className="text-2xl font-bold text-white mb-6 text-center">Megrendelés Adatok</h2>
-            <form onSubmit={handleSubmit} className="grid grid-cols-1 sm:grid-cols-2 gap-6 justify-items-center">
+            <form onSubmit={handleOrderConfirm} className="grid grid-cols-1 sm:grid-cols-2 gap-6 justify-items-center">
                 <div className="space-y-4 w-full max-w-md">
                     <input
                         type="text"
@@ -214,7 +227,22 @@ const OrderedData = () => {
                 </div>
             </form>
 
-            {message && <p className="mt-4 text-center text-white">{message}</p>}
+            {popupMessage && (
+                <AdminPopupWindows
+                isUserPage={true}
+                message={popupMessage}
+                popupNavigate={popupNavigate}
+                onConfirm={popupConfirmCallback}
+                onCancel={() => {
+                    setPopupMessage("");
+                    setPopupNavigate("");
+                    setPopupConfirmCallback(
+                    () => () => (setPopupMessage(""), setPopupNavigate(""))
+                    );
+                }}
+                popupWindowCancelButtonPreview={popupWindowCancelButtonPreview}
+                />
+            )}
         </div>
     );
 };
