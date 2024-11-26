@@ -74,7 +74,7 @@ router.get('/:id', async (req, res) => {
   }
 });
 
-// Rendelés frissítése ID alapján
+// User frissítése ID alapján
 router.put('/:id', async (req, res) => {
   const id = req.params.id;
   const { username, password, email, phone_number, zip_code, city, address } = req.body;
@@ -82,7 +82,7 @@ router.put('/:id', async (req, res) => {
   if (!username || !password || !email || !phone_number || !zip_code || !city || !address) return res.status(400).send('Hiányzó adatok!');
   const hashedPassword = await bcrypt.hash(password, 10);
   try {
-    const updatedOrderingData = {
+    const updatedUserData = {
       username,
       password: hashedPassword,
       email,
@@ -92,7 +92,7 @@ router.put('/:id', async (req, res) => {
       address,
     };
 
-    const updatedUser = await UserModel.findByIdAndUpdate(id, updatedOrderingData, { new: true, runValidators: true });
+    const updatedUser = await UserModel.findByIdAndUpdate(id, updatedUserData, { new: true, runValidators: true });
 
     if (!updatedUser) {
       return res.status(404).json({ error: 'A rendelés nem található!' });
