@@ -8,8 +8,7 @@ const RestaurantsPage = () => {
     const [chefOpacity, setChefOpacity] = useState('opacity-0');
     const [textOpacity, setTextOpacity] = useState('opacity-0');
 
-    const { ref: textRef, inView: textInView } = useInView({
-        textInView,
+    const { ref: textRef } = useInView({
         triggerOnce: true,
         threshold: 0.1,
         onChange: (inView) => {
@@ -17,8 +16,7 @@ const RestaurantsPage = () => {
         }
     });
 
-    const { ref: chefRef, inView: chefInView } = useInView({
-        chefInView,
+    const { ref: chefRef } = useInView({
         triggerOnce: true, 
         threshold: 0.1, 
         onChange: (inView) => {
