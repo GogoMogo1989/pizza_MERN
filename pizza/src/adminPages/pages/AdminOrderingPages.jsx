@@ -254,7 +254,7 @@ const AdminOrderingPage = () => {
           onCancel={() => {
             setPopupMessage('');
             setPopupNavigate('');
-            setPopupConfirmCallback(()=>()=>{setPopupMessage(""), setPopupNavigate("")})
+            setPopupConfirmCallback(()=>()=>{setPopupMessage(""); setPopupNavigate("");})
           }}
           popupWindowCancelButtonPreview={popupWindowCancelButtonPreview}
         />

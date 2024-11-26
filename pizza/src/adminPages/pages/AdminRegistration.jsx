@@ -15,7 +15,7 @@ const AdminRegistration = () => {
   const [popupMessage, setPopupMessage] = useState("");
   const [popupNavigate, setPopupNavigate] = useState("");
   const [popupConfirmCallback, setPopupConfirmCallback] = useState(
-    () => () => {setPopupMessage(""), setPopupNavigate("")}
+    () => () => {setPopupMessage(""); setPopupNavigate("");}
   );
   const popupWindowCancelButtonPreview = false;
   const navigate = useNavigate();
@@ -200,7 +200,7 @@ const AdminRegistration = () => {
             setPopupMessage("");
             setPopupNavigate("");
             setPopupConfirmCallback(
-              () => () => {setPopupMessage(""), setPopupNavigate("")}
+              () => () => {setPopupMessage(""); setPopupNavigate("");s}
             );
           }}
           popupWindowCancelButtonPreview={popupWindowCancelButtonPreview}

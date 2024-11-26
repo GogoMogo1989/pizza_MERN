@@ -18,7 +18,7 @@ const AdminMainPage = () => {
     const [popupNavigate, setPopupNavigate] = useState("");
     const [popupConfirmCallback, setPopupConfirmCallback] = useState(
         ()=>()=>{
-        setPopupMessage(""), setPopupNavigate("")
+        setPopupMessage(""); setPopupNavigate("");
     }); 
     const [popupWindowCancelButtonPreview, setPopupWindowCancelButtonPreview] = useState(false)
 
@@ -163,7 +163,7 @@ const AdminMainPage = () => {
                     onCancel={() => {
                         setPopupMessage('');
                         setPopupNavigate('');
-                        setPopupConfirmCallback(()=>()=>{setPopupMessage(""), setPopupNavigate("")});
+                        setPopupConfirmCallback(()=>()=>{setPopupMessage(""); setPopupNavigate("");});
                     }}
                     popupWindowCancelButtonPreview={popupWindowCancelButtonPreview}
                 />

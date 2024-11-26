@@ -13,7 +13,7 @@ const OrderedData = () => {
     const [popupMessage, setPopupMessage] = useState("");
     const [popupNavigate, setPopupNavigate] = useState("");
     const [popupConfirmCallback, setPopupConfirmCallback] = useState(
-      () => () => {setPopupMessage(""), setPopupNavigate("")}
+      () => () => {setPopupMessage(""); setPopupNavigate("");}
     );
     const [popupWindowCancelButtonPreview, setPopupWindowCancelButtonPreview] =
       useState(false);
@@ -237,7 +237,7 @@ const OrderedData = () => {
                     setPopupMessage("");
                     setPopupNavigate("");
                     setPopupConfirmCallback(
-                    () => () => {setPopupMessage(""), setPopupNavigate("")}
+                    () => () => {setPopupMessage(""); setPopupNavigate("");}
                     );
                 }}
                 popupWindowCancelButtonPreview={popupWindowCancelButtonPreview}

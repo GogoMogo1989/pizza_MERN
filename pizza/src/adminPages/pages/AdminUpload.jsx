@@ -22,7 +22,7 @@ const [description, setDescription] = useState('');
 const [itemId, setItemId] = useState(null);
 const [popupMessage, setPopupMessage] = useState('');
 const [popupNavigate, setPopupNavigate] = useState('');
-const [popupConfirmCallback, setPopupConfirmCallback] = useState(() => () => {setPopupMessage(""), setPopupNavigate("")});
+const [popupConfirmCallback, setPopupConfirmCallback] = useState(() => () => {setPopupMessage(""); setPopupNavigate("");});
 const [popupWindowCancelButtonPreview, setPopupWindowCancelButtonPreview] = useState(false);
 const [error, setError] = useState('')
 const location = useLocation();
@@ -217,7 +217,7 @@ const handleBack = () => {
                 onCancel={() => {
                 setPopupMessage('');
                 setPopupNavigate('');
-                setPopupConfirmCallback(()=>()=>{setPopupMessage(""), setPopupNavigate("")});
+                setPopupConfirmCallback(()=>()=>{setPopupMessage(""); setPopupNavigate("");});
                 }}
                 popupWindowCancelButtonPreview={popupWindowCancelButtonPreview}
                 />

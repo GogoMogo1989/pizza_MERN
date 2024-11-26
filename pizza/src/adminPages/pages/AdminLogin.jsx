@@ -11,7 +11,7 @@ const AdminLogin = () => {
   const [popupNavigate, setPopupNavigate] = useState("");
   const [popupConfirmCallback, setPopupConfirmCallback] = useState(
     () => () => {
-      setPopupMessage(""), setPopupNavigate("")
+      setPopupMessage(""); setPopupNavigate("");
     }
   );
   const [popupWindowCancelButtonPreview, setPopupWindowCancelButtonPreview] =
@@ -106,7 +106,7 @@ const AdminLogin = () => {
             setPopupNavigate("");
             setPopupConfirmCallback(
               () => () => {
-                setPopupMessage(""), setPopupNavigate("")
+                setPopupMessage(""); setPopupNavigate("");
               }
             );
           }}
