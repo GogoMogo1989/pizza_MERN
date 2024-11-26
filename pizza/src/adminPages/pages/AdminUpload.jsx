@@ -222,6 +222,11 @@ const handleBack = () => {
                 popupWindowCancelButtonPreview={popupWindowCancelButtonPreview}
                 />
             )}
+            {error && (
+            <div className="text-red-500 mt-4">
+                <p>{error}</p>
+            </div>
+            )}
         </div>
     );
 }

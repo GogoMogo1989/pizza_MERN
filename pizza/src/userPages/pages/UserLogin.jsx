@@ -14,8 +14,7 @@ const UserLogin = () => {
   const [popupConfirmCallback, setPopupConfirmCallback] = useState(
     () => () => {setPopupMessage(""); setPopupNavigate("");}
   );
-  const [popupWindowCancelButtonPreview, setPopupWindowCancelButtonPreview] =
-    useState(false);
+  const popupWindowCancelButtonPreview =false
 
   useEffect(() => {
     const userId = sessionStorage.getItem("userId");

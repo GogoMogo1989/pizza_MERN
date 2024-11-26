@@ -45,7 +45,7 @@ const AdminMainPage = () => {
     
       const handleDelete = async (id) => {
         try {
-          const result = await deleteData(id);
+          await deleteData(id);
           setData((prevData) => prevData.filter((item) => item._id !== id));
           setIsDataRefreshed((prev) => !prev);
         } catch (error) {
