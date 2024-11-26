@@ -1,4 +1,4 @@
-const API_BASE_URL = 'http://localhost:3000/api/userorder';
+const API_BASE_URL = 'https://pizza-mern.onrender.com/api/userorder';
 
 // Új rendelés feladása
 export async function createOrder(orderData) {

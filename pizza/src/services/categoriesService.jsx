@@ -1,4 +1,4 @@
-const API_BASE_URL = 'http://localhost:3000/api/categories';
+const API_BASE_URL = 'https://pizza-mern.onrender.com/api/categories';
 
 export async function fetchCategories() {
   try {
