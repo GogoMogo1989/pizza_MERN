@@ -75,4 +75,37 @@ router.get('/:id', async (req, res) => {
   }
 });
 
+// Admin frissítése ID alapján
+router.put('/:id', async (req, res) => {
+  const id = req.params.id;
+  const { username, password, email, masterKey } = req.body;
+
+  if (masterKey !== process.env.ADMIN_SECRET_KEY) return res.status(403).send('Hibás admin master key!');
+  if (!username || !password || !email ) return res.status(400).send('Hiányzó adatok!');
+  const hashedPassword = await bcrypt.hash(password, 10);
+  try {
+    const updatedAdminData = {
+      username,
+      password: hashedPassword,
+      email,
+    };
+
+    const updatedAdmin = await AdminModel.findByIdAndUpdate(id, updatedAdminData, { new: true, runValidators: true });
+
+    if (!updatedAdmin) {
+      return res.status(404).json({ error: 'A admin nem található!' });
+    }
+
+    console.log('A admin felhasználó sikeresen frissítve lett!');
+    
+    res.status(200).json(updatedUser);
+
+  } catch (err) {
+    console.error('Hiba az admin felhasználó frissítésekor:', err);
+    if (!res.headersSent) {
+      return res.status(500).json({ error: 'Hiba az admin felhasználó frissítésekor!' });
+    }
+  }
+});
+
 module.exports = router;
