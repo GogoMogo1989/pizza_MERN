@@ -80,11 +80,11 @@ router.put('/:id', async (req, res) => {
   const { username, password, email, phone_number, zip_code, city, address } = req.body;
 
   if (!username || !password || !email || !phone_number || !zip_code || !city || !address) return res.status(400).send('Hiányzó adatok!');
-
+  const hashedPassword = await bcrypt.hash(password, 10);
   try {
     const updatedOrderingData = {
       username,
-      password,
+      password: hashedPassword,
       email,
       phone_number,
       zip_code,
