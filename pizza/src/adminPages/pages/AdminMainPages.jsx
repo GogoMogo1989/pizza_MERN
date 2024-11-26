@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useRef } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import AdminNavbar from '../components/adminNavbar';
 import { DataGrid, gridClasses } from '@mui/x-data-grid';
@@ -27,8 +27,8 @@ const AdminMainPage = () => {
     useEffect(() => {
         const loadData = async () => {
           try {
-            const result = await fetchData();
-            setData(result);
+            const data = await fetchData();
+            setData(data);
           } catch (error) {
             setError(error.message);
           }

@@ -1,4 +1,4 @@
-import React, { useContext, useState, useEffect, useRef} from "react";
+import React, { useContext, useState, useEffect} from "react";
 import { CartContext } from "../components/cartContext";
 import woodenTexture from '../../assets/wooden-texture.jpg';
 import { Link } from "react-scroll";

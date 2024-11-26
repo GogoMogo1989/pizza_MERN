@@ -16,7 +16,7 @@ const UserRegistration = () => {
         city: '',
         address: ''
     });
-    const [error, setError] = useState('');
+    const error = '';
     const navigate = useNavigate();
     const [userNames, setUsersNames] = useState([]);
     const [isEditMode, setIsEditMode] = useState(false);

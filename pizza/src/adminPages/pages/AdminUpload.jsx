@@ -23,7 +23,7 @@ const [itemId, setItemId] = useState(null);
 const [popupMessage, setPopupMessage] = useState('');
 const [popupNavigate, setPopupNavigate] = useState('');
 const [popupConfirmCallback, setPopupConfirmCallback] = useState(() => () => {setPopupMessage(""); setPopupNavigate("");});
-const [popupWindowCancelButtonPreview, setPopupWindowCancelButtonPreview] = useState(false);
+const popupWindowCancelButtonPreview = false;
 const [error, setError] = useState('')
 const location = useLocation();
 const navigate = useNavigate();

@@ -86,13 +86,13 @@ const AdminLogin = () => {
             >
               Bejelentkezés
             </button>
-            <a
+            <button
               href="#"
               className="inline-block align-baseline font-bold text-sm text-blue-500 hover:text-blue-800"
               onClick={navigateToRegistration}
             >
               Regisztráció
-            </a>
+            </button>
           </div>
         </form>
       </div>
