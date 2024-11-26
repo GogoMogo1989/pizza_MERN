@@ -1,5 +1,5 @@
 const express = require('express');
-const bcrypt = require('bcrypt');
+const bcrypt = require('bcryptjs');
 const router = express.Router();
 const UserModel = require('../models/userUser');
 const sendMail = require('../utils/sendMail')
