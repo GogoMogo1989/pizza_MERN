@@ -1,4 +1,4 @@
-const API_BASE_URL = 'http://localhost:3000/api/admin';
+const API_BASE_URL = 'https://pizza-mern.onrender.com/api/admin';
 
 export async function deleteAdmin(id) {
   try {
