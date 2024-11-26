@@ -8,7 +8,10 @@ function AdminHeadSidebar() {
   const navigate = useNavigate();
   const [popupMessage, setPopupMessage] = useState('');
   const [popupNavigate, setPopupNavigate] = useState('');
-  const [popupConfirmCallback, setPopupConfirmCallback] = useState(() => () => (setPopupMessage(''), setPopupNavigate('')));
+  const [popupConfirmCallback, setPopupConfirmCallback] = useState(() => () => {
+    setPopupMessage(''); 
+    setPopupNavigate('');
+  });
   const [popupWindowCancelButtonPreview, setPopupWindowCancelButtonPreview] = useState(false);
   const { logout } = useAuth();
 
@@ -74,7 +77,10 @@ function AdminHeadSidebar() {
           onCancel={() => {
             setPopupMessage('');
             setPopupNavigate('');
-            setPopupConfirmCallback(() => () => (setPopupMessage(''), setPopupNavigate('')));
+            setPopupConfirmCallback(() => () => {
+              setPopupMessage('');
+              setPopupNavigate('')
+            });
           }}
           popupWindowCancelButtonPreview={popupWindowCancelButtonPreview}
         />

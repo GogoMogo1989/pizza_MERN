@@ -115,9 +115,9 @@ const UserFooter = () => {
             <div className="text-center mt-8 mb-4">
                 <p className="text-sm mb-2">Kövess minket:</p>
                 <div className="flex justify-center gap-6">
-                    <a href="#" className="text-yellow-400 hover:text-yellow-500">Facebook</a>
-                    <a href="#" className="text-yellow-400 hover:text-yellow-500">Instagram</a>
-                    <a href="#" className="text-yellow-400 hover:text-yellow-500">Twitter</a>
+                    <a href="www.facebook.com" className="text-yellow-400 hover:text-yellow-500">Facebook</a>
+                    <a href="www.instagram.com" className="text-yellow-400 hover:text-yellow-500">Instagram</a>
+                    <a href="www.twitter.com" className="text-yellow-400 hover:text-yellow-500">Twitter</a>
                 </div>
             </div>
 

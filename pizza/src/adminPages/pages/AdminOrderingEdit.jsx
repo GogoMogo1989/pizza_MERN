@@ -20,7 +20,7 @@ const AdminOrderingEdit = () => {
     const [typeOfPaid, setTypeOfPaid] = useState("")
     const [popupMessage, setPopupMessage] = useState("");
     const [popupNavigate, setPopupNavigate] = useState("");
-    const [popupConfirmCallback, setPopupConfirmCallback] = useState(()=>()=>(setPopupMessage(""), setPopupNavigate(""))); 
+    const [popupConfirmCallback, setPopupConfirmCallback] = useState(()=>()=>{setPopupMessage(""), setPopupNavigate("")}); 
     const popupWindowCancelButtonPreview = false
 
     useEffect(() => {
@@ -191,7 +191,7 @@ const AdminOrderingEdit = () => {
                     onCancel={() => {
                         setPopupMessage('');
                         setPopupNavigate('');
-                        setPopupConfirmCallback(()=>()=>(setPopupMessage(""), setPopupNavigate("")));
+                        setPopupConfirmCallback(()=>()=>{setPopupMessage(""), setPopupNavigate("")});
                     }}
                     popupWindowCancelButtonPreview={popupWindowCancelButtonPreview}
                 />
