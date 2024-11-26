@@ -21,7 +21,7 @@ const AdminOrderingPage = () => {
   const [isDataRefreshed, setIsDataRefreshed] = useState(false);
   const [popupMessage, setPopupMessage] = useState("");
   const [popupNavigate, setPopupNavigate] = useState("");
-  const [popupConfirmCallback, setPopupConfirmCallback] = useState(()=>()=>{setPopupMessage(""), setPopupNavigate("")}); 
+  const [popupConfirmCallback, setPopupConfirmCallback] = useState(()=>()=>{setPopupMessage(""); setPopupNavigate("");}); 
   const [popupWindowCancelButtonPreview, setPopupWindowCancelButtonPreview] = useState(false)
   const navigate = useNavigate();
 

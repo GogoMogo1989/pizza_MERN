@@ -200,7 +200,7 @@ const AdminRegistration = () => {
             setPopupMessage("");
             setPopupNavigate("");
             setPopupConfirmCallback(
-              () => () => {setPopupMessage(""); setPopupNavigate("");s}
+              () => () => {setPopupMessage(""); setPopupNavigate("");}
             );
           }}
           popupWindowCancelButtonPreview={popupWindowCancelButtonPreview}
