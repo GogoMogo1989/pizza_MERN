@@ -54,14 +54,14 @@ router.post('/', async (req, res) => {
         `- Rendelési adatok: ${ordered_data.map(item => `\n    - Termék neve: ${item.product_name}, Mennyiség: ${item.quantity}`).join('')}\n` +
         `- Fizetési mód: ${type_of_paid}\n` +
         `- Szállítási mód: ${type_of_delivery}\n\n` +
-        `Üdvözlettel,\nSilverland csapata`
+        `Üdvözlettel,\nBest Pizza csapata`
     };
 
     const sendToAdmin = {
       from: 'silverland2024@gmail.com',
       to: 'silverland2024@gmail.com',
       subject: 'Új rendelés érkezett!',
-      text: `Kedves Admin,\n\nÚj rendelés érkezett, a rendelés száma: ${orderNumber}.\n\nÜdvözlettel, Silverland`
+      text: `Kedves Admin,\n\nÚj rendelés érkezett, a rendelés száma: ${orderNumber}.\n\nÜdvözlettel, Best Pizza`
     };
 
     sendMail(sendToOrder);

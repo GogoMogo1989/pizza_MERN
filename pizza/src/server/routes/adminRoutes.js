@@ -20,7 +20,7 @@ router.post('/registration', async (req, res) => {
       from: 'silverland2024@gmail.com',
       to: email,
       subject: 'Sikeres regisztráció!',
-      text: `Kedves ${username},\n\nSikeres regisztráció!\n\nÜdvözlettel,\nSilverland csapata`
+      text: `Kedves ${username},\n\nSikeres regisztráció!\n\nÜdvözlettel,\nBest Pizza csapata`
     };
     sendMail(adminregistrationEmail);
 
