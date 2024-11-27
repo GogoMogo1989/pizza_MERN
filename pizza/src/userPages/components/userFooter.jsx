@@ -23,7 +23,7 @@ const UserFooter = () => {
                             E-mail: contact@bestpizzabudapest.com
                         </a>
                     </p>
-                    <p className="text-sm">Cím: Andrássy Út 45, 1061 Budapest, Magyarország</p>
+                    <p className="text-sm text-center">Cím: Andrássy Út 45, 1061 Budapest, Magyarország</p>
                 </div>
     
                 <div className="flex flex-col items-center mb-8 md:mb-0">
@@ -34,7 +34,7 @@ const UserFooter = () => {
                             E-mail: contact@bestpizzabudapest2.com
                         </a>
                     </p>
-                    <p className="text-sm">Cím: Rákóczi Út 12, 1088 Budapest, Magyarország</p>
+                    <p className="text-sm text-center">Cím: Rákóczi Út 12, 1088 Budapest, Magyarország</p>
                 </div>
             </div>
 

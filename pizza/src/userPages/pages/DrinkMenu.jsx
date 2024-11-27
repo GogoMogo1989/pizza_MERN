@@ -90,7 +90,7 @@ const DrinkMenu = () => {
                             className="bg-yellow-500 text-white py-2 px-4 rounded hover:bg-yellow-600 transition"
                             onClick={() => handleOrder(item)}
                         >
-                            Megrendelés
+                            Kosárba
                         </button>
                     </div>
                 ))}

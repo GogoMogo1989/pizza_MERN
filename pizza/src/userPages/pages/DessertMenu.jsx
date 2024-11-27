@@ -7,7 +7,7 @@ const DessertMenu = () => {
     const [data, setData] = useState([]);
     const [error, setError] = useState(null);
     const [quantities, setQuantities] = useState({});
-    const { addItemToCart } = useContext(CartContext); // Get addItemToCart function
+    const { addItemToCart } = useContext(CartContext); 
 
     useEffect(() => {
         const loadData = async () => {
@@ -33,7 +33,6 @@ const DessertMenu = () => {
         const quantity = quantities[item._id] || 1;
         const totalPrice = quantity * item.price;
 
-        // Add to cart logic
         addItemToCart({
             ...item,
             quantity: quantity,
@@ -94,7 +93,7 @@ const DessertMenu = () => {
                             className="bg-yellow-500 text-white py-2 px-4 rounded hover:bg-yellow-600 transition"
                             onClick={() => handleOrder(item)}
                         >
-                            Megrendelés
+                            Kosárba
                         </button>
                     </div>
                 ))}

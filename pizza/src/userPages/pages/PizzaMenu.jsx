@@ -33,7 +33,6 @@ const PizzaMenu = () => {
         const quantity = quantities[item._id] || 1;
         const totalPrice = quantity * item.price;
 
-        // Kosárba helyezés logikája
         addItemToCart({
             ...item,
             quantity: quantity,
@@ -94,7 +93,7 @@ const PizzaMenu = () => {
                             className="bg-yellow-500 text-white py-2 px-4 rounded hover:bg-yellow-600 transition"
                             onClick={() => handleOrder(item)}
                         >
-                            Megrendelés
+                            Kosárba
                         </button>
                     </div>
                 ))}
